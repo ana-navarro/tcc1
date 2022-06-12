@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
 const authRoute = require("./routes/auth");
+const companyRoute = require("./routes/company");
 
 const app = express();
 
@@ -22,4 +23,5 @@ app.listen(process.env.PORT || 3000 , () => {
 });
 
 app.use(express.json());
-app.use("/api", authRoute)
+app.use("/api", authRoute);
+app.use("/api/companies", companyRoute);
