@@ -18,7 +18,6 @@ router.post("/login",async (req, res, next) => {
             _id: user._id,
             name: user.name,
             email: user.email,
-            isAdmin: user.isAdmin,
             token: generateToken(user._id),
             })
         } else {
@@ -58,7 +57,10 @@ router.post('/register',
                 password: hash,
             });
             const token = generateToken(newUser._id);
-            res.status(201).json(token);
+            res.status(201).json({
+                newUser,
+                token
+            });
         }catch(err){
             console.error(err);
             res.status(500).send('Internal Error');
