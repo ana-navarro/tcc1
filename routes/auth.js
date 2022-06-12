@@ -44,21 +44,21 @@ router.post('/register',
             return res.status(400).json({errors: errors.array() });
         }
         try{
+            const { firstname, lastname, email } = req.body;
             const salt = await bcrypt.genSalt(10);
             const hash = await bcrypt.hash(req.body.password, salt);
-            const newUser = new User({
-                firstname:req.body.firstname,
-                lastname:req.body.lastname,
-                email:req.body.email,
-                password: hash,
-                token: generateToken(newUser._id)
-            });
             let userRegisted = await User.findOne({email});
             if(userRegisted){
-                res.status(400).json({ erros: [{ msg:'User already exists' }]});
+                res.status(400).json({ erros: [{ msg:'Something is Wrong' }]});
             }
-            await newUser.save();
-            res.status(201).json(newUser);
+            const newUser = await User.create({
+                firstname,
+                lastname,
+                email,
+                password: hash,
+            });
+            const token = generateToken(newUser._id);
+            res.status(201).json(token);
         }catch(err){
             console.error(err);
             res.status(500).send('Internal Error');
