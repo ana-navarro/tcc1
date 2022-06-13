@@ -32,8 +32,7 @@ router.post("/login",async (req, res, next) => {
 });
 
 router.post('/register', 
-    check('firstname', 'First Name is required').not().isEmpty(),
-    check('lastname', 'Last Name is required').not().isEmpty(),
+    check('name', 'First Name is required').not().isEmpty(),
     check('email', 'Please include a valid email').isEmail(),
     check('password', 'Please enter a valid password').isLength({min: 8})
     , async (req, res) => {
@@ -42,7 +41,7 @@ router.post('/register',
             return res.status(400).json({errors: errors.array() });
         }
         try{
-            const { firstname, lastname, email } = req.body;
+            const { name, email } = req.body;
             const salt = await bcrypt.genSalt(10);
             const hash = await bcrypt.hash(req.body.password, salt);
             let userRegisted = await User.findOne({email});
@@ -50,8 +49,7 @@ router.post('/register',
                 res.status(400).json({ erros: [{ msg:'Something is Wrong' }]});
             }
             const newUser = await User.create({
-                firstname,
-                lastname,
+                name,
                 email,
                 password: hash,
             });

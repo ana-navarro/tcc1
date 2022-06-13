@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 
 const TechincalSchema = mongoose.Schema({
-    idInstallationNumber: { type: Number, required: true },
-    idCompany: { type: String, required: true },
+    idInstallationNumber: { type: mongoose.Schema.Types.ObjectId, ref: "installations" },
+    idCompany: { type: mongoose.Schema.Types.ObjectId, ref: "companies"},
     mounth: {  type: String, required: true },
     previousBalance: { type: mongoose.Types.Decimal128, required: true },
     actualBalance: { type: mongoose.Types.Decimal128, required: true },
@@ -13,4 +13,6 @@ const TechincalSchema = mongoose.Schema({
     timestamps:true
 });
 
-module.exports = TechincalSchema;
+const Technical = mongoose.model('technincal', TechincalSchema);
+
+module.exports = Technical;

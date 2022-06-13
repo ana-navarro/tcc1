@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 const authRoute = require("./routes/auth");
 const companyRoute = require("./routes/company");
-const companyRoute = require("./routes/user");
+const userRoute = require("./routes/user");
 
 const app = express();
 

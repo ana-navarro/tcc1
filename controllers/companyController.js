@@ -1,4 +1,4 @@
-const Company = require('../models/Company');
+    const Company = require('../models/Company');
 
 const createCompany = async (req, res) => {
     try{
@@ -7,6 +7,7 @@ const createCompany = async (req, res) => {
             administrator: req.params.administrator,
             phone: req.body.phone, 
             cnpj: req.body.cnpj,
+            email: req.body.cnpj,
             street: req.body.street,
             neighborhood: req.body.neighborhood,
             number: req.body.number,
@@ -15,7 +16,7 @@ const createCompany = async (req, res) => {
         });
         const savedCompany = await newCompany.save();
         res.status(201).json({savedCompany, "msg": "Company Created!"});
-    }catch(err){
+    }catch(err){        
         console.error(err);
         res.status(500).send("Internal Error!");
     }

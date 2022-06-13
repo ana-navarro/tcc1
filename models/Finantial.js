@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const FinantialSchema = mongoose.Schema({
-    idTechnical: { type: String, required: true },
+    idTechnical: { type: mongoose.Schema.Types.ObjectId, ref: "technical" },
     valueEnergy: { type: mongoose.Types.Decimal128, required: true },
     discount: { type: mongoose.Types.Decimal128, required: true },
     valueDiscount: { type: mongoose.Types.Decimal128, required: true },
@@ -12,4 +12,6 @@ const FinantialSchema = mongoose.Schema({
     timestamps:true
 });
 
-module.exports = FinantialSchema;
+const Finantial = mongoose.model('Finantial', FinantialSchema);
+
+module.exports = Finantial;

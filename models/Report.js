@@ -5,7 +5,7 @@ const reportSchema = new mongoose.Schema({
     content: { type: String, required:true },
     slug: { type: String, required:true },
     img: { type: String, required:true },
-    idFinantial: { type: String, required:true },
+    idFinantial: { type: mongoose.Schema.Types.ObjectId, ref: "finantial" },
     idUser: { type: String },
     isConclude: { type: Boolean, default: false }
 },
