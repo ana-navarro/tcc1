@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 
 const authRoute = require("./routes/auth");
 const companyRoute = require("./routes/company");
+const companyRoute = require("./routes/user");
 
 const app = express();
 
@@ -24,4 +25,5 @@ app.listen(process.env.PORT || 3000 , () => {
 
 app.use(express.json());
 app.use("/api", authRoute);
-app.use("/api/companies", companyRoute);
+app.use("/api/company", companyRoute);
+app.use("/api/user", userRoute);

@@ -1,5 +1,6 @@
-const jwt = require("jsonwebtoken")
-const dotenv = require("dotenv").config()
+const jwt = require("jsonwebtoken");
+const dotenv = require("dotenv").config();
+const http = require('http');
 
 const checkToken = (req, res, next) => {
     const token = req.header('x-auth-token');
@@ -21,5 +22,6 @@ const generateToken = (_id) => {
         expiresIn: '30d',
     });
 }
+
 
 module.exports = { generateToken, checkToken };

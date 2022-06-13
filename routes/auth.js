@@ -3,9 +3,8 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 const { check, validationResult } = require('express-validator');
-const auth = require("./middlewares/auth");
 const User = require("../models/User");
-const { generateToken } = require("./middlewares/auth")
+const { generateToken, checkToken } = require("./middlewares/auth")
 
 dotenv.config();
 
@@ -66,5 +65,12 @@ router.post('/register',
             res.status(500).send('Internal Error');
         }
 });
+
+router.post('/logout', checkToken, (req, res) => {
+    res.removeHeader('x-auth-token');
+    res.send('You are Logged Out!');
+});
+
+router.post('/forget-password', (req, res) => {});
 
 module.exports = router;
