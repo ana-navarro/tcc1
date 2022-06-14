@@ -1,26 +1,7 @@
 const User = require("../models/User");
 
-const addCompany = async (req, res) => {
-    try {
-        const userCompany = await User.findById(req.params.id);
-        if(userCompany){
-            userCompany.companyId = req.params.companyId
-        }else {
-            res.status(404);
-            throw new Error('User not found');
-        }
-        await userCompany.save();
-        res.json({ "msg": "Company added!" });
-    }catch(err){
-        console.error(err);
-        res.status(500).send("Internal Error!");
-    }
-}
-
 const editProfile = async (req, res) => {
-    const { firstname, 
-            lastname, 
-            companyId, 
+    const { name, 
             isAdmin, 
             isEngineer, 
             isFinantial, 
@@ -28,21 +9,17 @@ const editProfile = async (req, res) => {
     try{
         const  editUser = await User.findById(req.params.id);
         if(editUser){
-            editUser.firstname = firstname,
-            editUser.lastname = lastname,
+            editUser.name = name,
             editUser.isAdmin = isAdmin,
             editUser.isEngineer = isEngineer,
             editUser.isFinantial = isFinantial,
             editUser.isManager = isManager
-            if(editUser.companyId){
-                editUser.companyId = companyId
-            } else {
-                addCompany();
-            }
         } else {
             res.status(404);
             throw new Error('User not found');
         }
+        await editUser.save()
+        res.status(202).json(editUser)
     }catch(err){
         console.error(err);
         res.status(500).send("Internal Error!");
@@ -88,8 +65,16 @@ const changePassword = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(newPassword, salt);
     try{
-        if (user && (await user.matchPassword(oldPassword))) {
-            user.password = hash
+        const equal = await bcrypt.compare(oldPassword, newPassword)
+        if(equal){
+            res.status(401)
+            throw new Error('Passwords needs to be diferrents!');
+        }
+        else if (user && (await user.matchPassword(oldPassword))) {
+            const newUserPassword = await User.findByIdAndUpdate(req.params.id, {
+                password: hash
+            });
+            res.status(202).json(newUserPassword, {"msg": "Password has been changed!"});
         } else {
             res.status(401)
             throw new Error('Invalid password')
@@ -101,7 +86,6 @@ const changePassword = async (req, res) => {
 }
 
 module.exports = {
-    addCompany,
     changePassword,
     editProfile,
     getUsers,

@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 const companySchema = mongoose.Schema({
     name: { type: String, required: true },
-    administrator: { type: Schema.Types.ObjectId, ref: "users" },
     email: { type: String, required: true },
     phone: { type: String, required: true },
     cnpj: { type: String, required: true },
