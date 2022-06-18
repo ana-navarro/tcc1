@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const FinantialSchema = mongoose.Schema({
     idTechnical: { type: mongoose.Schema.Types.ObjectId, ref: "technical" },
+    idCompany: { type: mongoose.Schema.Types.ObjectId, ref: "companies"},
     valueEnergy: { type: mongoose.Types.Decimal128, required: true },
     discount: { type: mongoose.Types.Decimal128, required: true },
     valueDiscount: { type: mongoose.Types.Decimal128, required: true },

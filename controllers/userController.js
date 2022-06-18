@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const bcrypt = require("bcrypt");
 
 const editProfile = async (req, res) => {
     const { name, 
@@ -60,29 +61,21 @@ const getUser = async (req, res) => {
 }
 
 const changePassword = async (req, res) => {
-    const { oldPassword, newPassword } = req.body;
+    const { password, newPassword } = req.body;
     const user = await User.findById(req.params.id);
     const salt = await bcrypt.genSalt(10);
-    const hash = await bcrypt.hash(newPassword, salt);
+    const hash = bcrypt.hash(newPassword, salt);
     try{
-        const equal = await bcrypt.compare(oldPassword, newPassword)
-        if(equal){
-            res.status(401)
-            throw new Error('Passwords needs to be diferrents!');
-        }
-        else if (user && (await user.matchPassword(oldPassword))) {
-            const newUserPassword = await User.findByIdAndUpdate(req.params.id, {
-                password: hash
-            });
-            res.status(202).json(newUserPassword, {"msg": "Password has been changed!"});
+        if (user && (await user.matchPassword(password))) {
+            user.password = hash
         } else {
-            res.status(401)
-            throw new Error('Invalid password')
+            res.status(401).json({ "msg": 'Invalid password'})
         }
     }catch(err){
         console.error(err);
         res.status(500).send("Internal Error!");
     }
+    res.status(200).json(user)
 }
 
 module.exports = {

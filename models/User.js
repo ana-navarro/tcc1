@@ -8,7 +8,9 @@ const userSchema = new mongoose.Schema({
     password: { type:String, required:true },
     isAdmin: { type: Boolean, default: false },
     isEngineer: { type: Boolean, default: false },
-    isManager: { type: Boolean, default: false }
+    isManager: { type: Boolean, default: false },
+    resetLink: {type:String, default:''},
+    verified: { type: Boolean, default: false }
 },
 {
     timestamps:true
