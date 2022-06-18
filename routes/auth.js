@@ -4,7 +4,11 @@ const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
 const { check, validationResult } = require('express-validator');
 const User = require("../models/User");
-const { generateToken, checkToken } = require("./middlewares/auth")
+const { generateToken, checkToken } = require("./middlewares/auth");
+const Token = require("../models/token");
+const crypto = require("crypto");
+const sendEmail = require("../utils/sendEmail");
+const Joi = require("joi");
 
 dotenv.config();
 
@@ -53,7 +57,12 @@ router.post('/register',
                 email,
                 password: hash,
             });
-            const token = generateToken(newUser._id);
+            // const token = generateToken(newUser._id);
+            const token = await new Token({
+                userId: newUser._id,
+                token: crypto.randomBytes(32).toString("hex"),
+            }).save();
+
             res.status(201).json({
                 newUser,
                 token
@@ -70,5 +79,65 @@ router.post('/logout', checkToken, (req, res) => {
 });
 
 router.post('/forget-password', (req, res) => {});
+
+router.post("/", async (req, res) => {
+	try {
+		const { error } = validate(req.body);
+		if (error)
+			return res.status(400).send({ message: error.details[0].message });
+
+		const user = await User.findOne({ email: req.body.email });
+		if (!user)
+			return res.status(401).send({ message: "Invalid Email or Password" });
+
+		const validPassword = await bcrypt.compare(
+			req.body.password,
+			user.password
+		);
+		if (!validPassword)
+			return res.status(401).send({ message: "Invalid Email or Password" });
+
+		if (!user.verified) {
+			let token = await Token.findOne({ userId: user._id });
+			if (!token) {
+				token = await new Token({
+					userId: user._id,
+					token: crypto.randomBytes(32).toString("hex"),
+				}).save();
+				const url = `${process.env.BASE_URL}users/${user._id}/verify/${token.token}`;
+				await sendEmail(user.email, "Verify Email", url);
+			}
+
+			return res
+				.status(400)
+				.send({ message: "An Email sent to your account please verify" });
+		}
+
+		const token = user.generateAuthToken();
+		res.status(200).send({ data: token, message: "logged in successfully" });
+	} catch (error) {
+		res.status(500).send({ message: "Internal Server Error" });
+	}
+});
+
+router.get("/:id/verify/:token/", async (req, res) => {
+	try {
+		const user = await User.findOne({ _id: req.params.id });
+		if (!user) return res.status(400).send({ message: "Invalid link" });
+
+		const token = await Token.findOne({
+			userId: user._id,
+			token: req.params.token,
+		});
+		if (!token) return res.status(400).send({ message: "Invalid link" });
+
+		await User.updateOne({ _id: user._id, verified: true });
+		await token.remove();
+
+		res.status(200).send({ message: "Email verified successfully" });
+	} catch (error) {
+		res.status(500).send({ message: "Internal Server Error" });
+	}
+});
 
 module.exports = router;

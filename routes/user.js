@@ -8,7 +8,9 @@ router.get("/", checkToken, getUsers);
 router.put("/edit-profile/:id", checkToken, editProfile);
 router.delete("/:id", checkToken, deleteUser);
 router.get("/:id", checkToken, getUser);
-router.put("/change-password/:id", checkToken, changePassword);
+
+
+router.put("/reset/:id", checkToken, changePassword);
 
 router.put("/company/add/:id", checkToken, async (req, res) => {
     try {
