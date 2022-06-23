@@ -22,7 +22,7 @@ const createCompany = async (req, res) => {
 };
 
 const updateCompany = async (req, res) => {
-    const { name, administrator, phone, street, neighborhood, number, state, city } = req.body;
+    const { name, phone, street, neighborhood, number, state, city } = req.body;
     try{
         const updatedCompany = await Company.findById(req.params.id)
         if(updatedCompany){

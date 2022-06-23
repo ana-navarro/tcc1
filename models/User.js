@@ -7,8 +7,6 @@ const userSchema = new mongoose.Schema({
     companyId: { type: mongoose.Schema.Types.ObjectId, ref: "companies" },
     password: { type:String, required:true },
     isAdmin: { type: Boolean, default: false },
-    isEngineer: { type: Boolean, default: false },
-    isManager: { type: Boolean, default: false },
     resetLink: {type:String, default:''},
     verified: { type: Boolean, default: false }
 },

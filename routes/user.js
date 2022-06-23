@@ -12,7 +12,7 @@ router.get("/:id", checkToken, getUser);
 
 router.put("/reset/:id", checkToken, changePassword);
 
-router.put("/company/add/:id", checkToken, async (req, res) => {
+router.post("/company/add/:id", checkToken, async (req, res) => {
     try {
         const company = await Company.findById(req.body.companyId);
         const userCompany = await User.findByIdAndUpdate(req.params.id, {

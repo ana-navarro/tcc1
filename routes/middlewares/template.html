@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <title>Node PDF Creator</title>
+        <!-- Bootstrap CSS -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+            integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+            crossorigin="anonymous"
+        />
+    </head>
+    <body>
+        <h1>Relatório {{ this.month}}</h1>
+        <div class="container">
+            <div class="row">
+                {{ this.name }} 
+                {{ this.email }} 
+                {{ this.phone }} 
+                {{ this.cnpj }}
+                {{ this.street }} - {{ this.number }} 
+                {{ this.neighborhood }}
+                {{ this.city }} - {{ this.state }}
+            </div>
+            <h4 class="text-center"> N° Instalação: {{ this.installationNumber }}</h4>
+            <div class="row">
+                <div class="col-4">
+                    Saldo Anterior:
+                    <div class="p-2 bg-light border">
+                        {{ this.previousBalance }}
+                    </div>
+                </div>
+                <div class="col-4">
+                    Saldo Atual:
+                    <div class="p-2 bg-light border">
+                        {{ this.actualBalance }}
+                    </div>
+                </div>
+                <div class="col-4">
+                    Injetada:
+                    <div class="p-2 bg-light border">
+                        {{ this.injected }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    Total Injetada:
+                    <div class="p-2 bg-light border">
+                        {{ this.totalInjected }}
+                    </div>
+                </div>
+                <div class="col">
+                    Valor de Energia:
+                    <div class="p-2 bg-light border">
+                        {{ this.valueEnergy }}
+                    </div>
+                </div>
+                <div class="col">
+                    Desconto:
+                    <div class="p-2 bg-light border">
+                        {{ this.discount }}
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    Valor de Desconto: 
+                    <div class="p-2 bg-light border">
+                        {{ this.valueDiscount }}
+                    </div>
+                </div>
+                <div class="col">
+                    Data de Vencimento:
+                    <div class="p-2 bg-light border">
+                        {{ this.date }}
+                    </div>
+                </div>
+                <div class="col">
+                </div>
+            </div>
+            <div class="row">
+                Valor a Pagar:
+                    <div class="p-2 bg-light border text-center">
+                        {{ this.payment }}
+                    </div>
+            </div>
+        
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"
+        ></script>
+        <script
+            src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"
+        ></script>
+    </body>
+</html>
