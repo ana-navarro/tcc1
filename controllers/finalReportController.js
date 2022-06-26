@@ -22,8 +22,7 @@ const getFinalReport = async (req, res) => {
         if(finalReport){
             const technicalReport = await Technical.findById(finalReport.idTechnical);
             const finantialReport = await Finantial.findById(finalReport.idFinantial);
-            const writeReport = await Write.findById(finalReport.idWrite);
-            res.json({technicalReport, finantialReport, writeReport});
+            res.json({technicalReport, finantialReport});
         }else{
             res.status(404).json({"msg": "Final Report wasn't found"})
         }
@@ -52,18 +51,12 @@ const createFinalReport = async (req, res) => {
             injected: req.body.injected,
             totalInjected: req.body.totalInjected
         });
-        const newWrite = new Write({
-            title: req.body.title,
-            content:req.body.content,
-            img: req.body.img
-        });
 
         await newTechnical.save()
         await newWrite.save()
         await newFinantial.save()
 
         const finalReport = new Final({
-            idWrite: newWrite._id,
             idTechnical: newTechnical._id,
             idFinantial: newFinantial.id
         });
@@ -96,12 +89,7 @@ const updateFinalReport = async (req, res) => {
                 injected: req.body.injected,
                 totalInjected: req.body.totalInjected
             });
-            const updatedWrite = await Write.findByIdAndUpdate(updatedFinal.idWrite, {
-                title: req.body.title,
-                content:req.body.content,
-                img: req.body.img,
-            });
-            res.json({updatedTechnical, finantialReport, updatedWrite, updatedFinal});
+            res.json({updatedTechnical, finantialReport, updatedFinal});
         }
 
         if(updatedFinal) {

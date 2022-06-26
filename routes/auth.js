@@ -8,7 +8,6 @@ const { generateToken, checkToken } = require("./middlewares/auth");
 const Token = require("../models/token");
 const crypto = require("crypto");
 const sendEmail = require("../utils/sendEmail");
-const Joi = require("joi");
 
 dotenv.config();
 
