@@ -10,7 +10,5 @@ const finalreportSchema = new mongoose.Schema({
 {
     timestamps:true
 });
-
 const Report = mongoose.model('final-report', finalreportSchema);
-
 module.exports = Report;
