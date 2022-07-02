@@ -36,7 +36,6 @@ const getFinalReport = async (req, res) => {
 const createFinalReport = async (req, res) => {
     try{
         const newFinantial = new Finantial({
-            idCompany: req.body.idCompany,
             valueEnergy: req.body.valueEnergy,
             discount: req.body.discount,
             valueDiscount: req.body.valueDiscount,
