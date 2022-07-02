@@ -4,7 +4,7 @@ const Finantial = require("../models/Finantial");
 const Final = require("../models/FinalReport");
 
 const getFinalReports = async (req, res) => {
-    const { idReport, idFinantial, idTechnical, ...others } = req.query;
+    const { idReport, companyId, idTechnical, createdAt, ...others } = req.query;
     try{
         const finalreports = await Final.find({
             ...others
@@ -19,11 +19,14 @@ const getFinalReports = async (req, res) => {
 const getFinalReport = async (req, res) => {
     try{
         const finalReport = await Final.findById(req.params.id);
-        const technicalReport = await Technical.findById(finalReport.idTechnical);
-        const finantialReport = await Finantial.findById(finalReport.idFinantial);
-        const writeReport = await Write.findById(finalReport.idWrite);
-        
-        res.status(200).json({technicalReport, finantialReport, writeReport});
+        if(finalReport){
+            const technicalReport = await Technical.findById(finalReport.idTechnical);
+            const finantialReport = await Finantial.findById(finalReport.idFinantial);
+            res.json({technicalReport, finantialReport});
+        }else{
+            res.status(404).json({"msg": "Final Report wasn't found"})
+        }
+        res.status(200);
     }catch(err){
         console.error(err);
         res.status(500).send({"msg": "Internal Error!"})
@@ -33,7 +36,6 @@ const getFinalReport = async (req, res) => {
 const createFinalReport = async (req, res) => {
     try{
         const newFinantial = new Finantial({
-            idCompany: req.body.idCompany,
             valueEnergy: req.body.valueEnergy,
             discount: req.body.discount,
             valueDiscount: req.body.valueDiscount,
@@ -48,20 +50,15 @@ const createFinalReport = async (req, res) => {
             injected: req.body.injected,
             totalInjected: req.body.totalInjected
         });
-        const newWrite = new Write({
-            title: req.body.title,
-            content:req.body.content,
-            img: req.body.img
-        });
 
         await newTechnical.save()
         await newWrite.save()
         await newFinantial.save()
 
         const finalReport = new Final({
-            idWrite: newWrite._id,
             idTechnical: newTechnical._id,
-            idFinantial: newFinantial.id
+            idFinantial: newFinantial.id,
+            companyId: req.body.companyId
         });
         await finalReport.save()
 
@@ -76,34 +73,31 @@ const updateFinalReport = async (req, res) => {
     try{
         const updatedFinal = await Final.findById(req.params.id);
 
-        const updatedFinantial = await Finantial.findByIdAndUpdate(updatedFinal.idFinantial, {
-            valueEnergy: req.body.valueEnergy,
-            discount: req.body.discount,
-            valueDiscount: req.body.valueDiscount,
-            date: req.body.date,
-            payment: req.body.payment
-        });
-            
-        const updatedTechnical = await Technical.findByIdAndUpdate(updatedFinal.idTechnical, {
-            months: req.body.months,
-            previousBalance: req.body.previousBalance,
-            actualBalance: req.body.actualBalance,
-            injected: req.body.injected,
-            totalInjected: req.body.totalInjected
-        });
-        const updatedWrite = await Write.findByIdAndUpdate(updatedFinal.idWrite, {
-            title: req.body.title,
-            content:req.body.content, 
-            slug: req.body.slug,
-            img: req.body.img,
-        });
+        if(updatedFinal){
+            const finantialReport = await Finantial.findByIdAndUpdate(updatedFinal.idFinantial, {
+                valueEnergy: req.body.valueEnergy,
+                discount: req.body.discount,
+                valueDiscount: req.body.valueDiscount,
+                date: req.body.date,
+                payment: req.body.payment
+            });
+                
+            const updatedTechnical = await Technical.findByIdAndUpdate(updatedFinal.idTechnical, {
+                months: req.body.months,
+                previousBalance: req.body.previousBalance,
+                actualBalance: req.body.actualBalance,
+                injected: req.body.injected,
+                totalInjected: req.body.totalInjected
+            });
+            res.json({updatedTechnical, finantialReport, updatedFinal});
+        }
 
         if(updatedFinal) {
             updatedFinal.isConclude = req.body.isConclude
         } else {
             res.status(404).json({"msg": "Report was not found"});
         }
-        res.json({updatedFinantial, updatedTechnical, updatedWrite, updatedFinal}).status(201);
+        res.status(201);
     }catch(err){
         console.error(err);
         res.status(500).send({"msg": "Internal Error!"})

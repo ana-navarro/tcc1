@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const reportSchema = new mongoose.Schema({
+const writeReport = new mongoose.Schema({
     title: { type: String, required:true },
     content: { type: String, required:true },
     img: { type: String, required:true }
@@ -9,6 +9,6 @@ const reportSchema = new mongoose.Schema({
     timestamps:true
 });
 
-const Report = mongoose.model('write-report', reportSchema);
+const Write = mongoose.model('write-report', writeReport);
 
-module.exports = Report;
+module.exports = Write;

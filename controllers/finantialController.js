@@ -3,7 +3,6 @@ const Finantial = require("../models/Finantial");
 const createFinatial = async (req, res) => {
     try{
         const newFinantial = new Finantial({
-            idCompany: req.body.idCompany,
             valueEnergy: req.body.valueEnergy,
             discount: req.body.discount,
             valueDiscount: req.body.valueDiscount,
@@ -23,7 +22,6 @@ const updateFinatial = async (req, res) => {
     try{
         const updatedFinantial = await Finantial.findById(req.params.id)
         if(updatedFinantial){
-            updatedFinantial.idCompany = idCompany,
             updatedFinantial.valueEnergy = valueEnergy,
             updatedFinantial.discount = discount,
             updatedFinantial.valueDiscount = valueDiscount,

@@ -9,6 +9,7 @@
             integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
             crossorigin="anonymous"
         />
+        <link rel="stylesheet" type="text/css" href="template.css">
     </head>
     <body>
         <h1>Relatório {{ this.month}}</h1>
@@ -45,19 +46,19 @@
             </div>
 
             <div class="row">
-                <div class="col">
+                <div class="col-4">
                     Total Injetada:
                     <div class="p-2 bg-light border">
                         {{ this.totalInjected }}
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-4">
                     Valor de Energia:
                     <div class="p-2 bg-light border">
                         {{ this.valueEnergy }}
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-4">
                     Desconto:
                     <div class="p-2 bg-light border">
                         {{ this.discount }}
@@ -65,19 +66,19 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col-4">
                     Valor de Desconto: 
                     <div class="p-2 bg-light border">
                         {{ this.valueDiscount }}
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-4">
                     Data de Vencimento:
                     <div class="p-2 bg-light border">
                         {{ this.date }}
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-4">
                 </div>
             </div>
             <div class="row">

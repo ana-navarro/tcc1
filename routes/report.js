@@ -10,7 +10,7 @@ router.get("/final/:id", checkToken, getFinalReport);
 router.post("/final/add", checkToken, createFinalReport);
 router.put("/final/:id", checkToken, updateFinalReport);
 router.delete("/final/:id", checkToken, deleteFinalReport);
-router.get("/final/pdf/:id", checkToken, generatePDF);
+router.get("/final/pdf/:id", generatePDF);
 
 // router.get("/technical/", checkToken, getTechnicals);
 // router.post("/technical/add", checkToken, createTechnical);

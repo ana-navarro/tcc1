@@ -6,9 +6,10 @@ const Company = require("../../models/Company");
 const Installation = require("../../models/Installation");
 
 const pdf = require("pdf-creator-node");
+const path = require('path')
 const fs = require("fs");
-const path = require("path");
-const html = fs.readFileSync(path.join(__dirname, "./template.html"), "utf8");
+const html = fs.readFileSync("routes/middlewares/template.html", "utf8");
+const css = fs.readFileSync("routes/middlewares/template.css", "utf8");
 
 const options = {
     format: "A4",
@@ -26,6 +27,7 @@ const generatePDF = async (req, res) => {
 
         const document = {
             html: html,
+            css: css,
             data: {
                 month: technicalReport.months,
                 name: companyInfo.name,
@@ -48,15 +50,16 @@ const generatePDF = async (req, res) => {
                 date: finantialReport.date,
                 payment: finantialReport.payment,
         },
-            path: "./output.pdf",
-            type: "",
+            path: "",
+            type: "buffer",
         };
 
         pdf
             .create(document, options)
             .then((pdfres) => {
-                res.writeHead(200, { 'Content-Type': 'application/json' });
-                res.write(JSON.stringify(pdfres));
+                res.writeHead(200, { 'Content-Type': 'application/pdf' });
+                res.write(pdfres);
+                console.log(pdfres)
                 res.end();
             })
             .catch((error) => {
