@@ -1,9 +1,6 @@
 {
   "name": "front",
   "version": "0.1.0",
-<<<<<<< HEAD
-  "private": true
-=======
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",
@@ -40,5 +37,4 @@
       "last 1 safari version"
     ]
   }
->>>>>>> 777d5e336b69b9ff40e3b24c2d74348855b74942
 }

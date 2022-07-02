@@ -4,7 +4,7 @@ const Finantial = require("../models/Finantial");
 const Final = require("../models/FinalReport");
 
 const getFinalReports = async (req, res) => {
-    const { idReport, idFinantial, idTechnical, createdAt, ...others } = req.query;
+    const { idReport, companyId, idTechnical, createdAt, ...others } = req.query;
     try{
         const finalreports = await Final.find({
             ...others
@@ -57,7 +57,8 @@ const createFinalReport = async (req, res) => {
 
         const finalReport = new Final({
             idTechnical: newTechnical._id,
-            idFinantial: newFinantial.id
+            idFinantial: newFinantial.id,
+            companyId: req.body.companyId
         });
         await finalReport.save()
 

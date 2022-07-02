@@ -5,7 +5,8 @@ const mongoose = require("mongoose");
 const authRoute = require("./routes/auth");
 const companyRoute = require("./routes/company");
 const userRoute = require("./routes/user");
-const reportRoute = require("./routes/report")
+const reportRoute = require("./routes/report");
+const maintenanceRoute = require("./routes/maintenance");
 
 const app = express();
 
@@ -29,3 +30,4 @@ app.use("/api", authRoute);
 app.use("/api/company", companyRoute);
 app.use("/api/user", userRoute);
 app.use("/api/report", reportRoute);
+app.use("/api/maintenance", maintenanceRoute);
