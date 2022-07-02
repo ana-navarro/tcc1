@@ -1,0 +1,24 @@
+#budget{
+    background-color: #8D8DAA;
+    color: white;
+    text-align: center;
+    font-weight: 900;
+    font-size: 16px;
+    padding: 20px;
+}
+
+#home{
+    background-color: white;
+}
+
+#card{
+    background-color: white;
+    padding-bottom: 20px;
+    text-align: justify;
+    text-justify: inter-word;
+}
+
+#card h3{
+    padding-bottom: 20px;
+    font-weight: 900 bold;
+}

@@ -6,14 +6,21 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+<<<<<<< HEAD
     "dev": "nodemon index.js",
     "server": "nodemon backend/server",
     "client": "npm start --prefix tcc1-front"
+=======
+    "server": "nodemon index.js",
+    "client": "npm start --prefix front",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
+>>>>>>> 777d5e336b69b9ff40e3b24c2d74348855b74942
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/react-router-dom": "^5.3.3",
     "axios": "^0.27.2",
     "bcrypt": "^5.0.1",
     "bootstrap": "^5.2.0-beta1",
@@ -28,10 +35,16 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.4.0",
     "nodemailer": "^6.7.5",
-    "pdf-creator-node": "^2.3.4"
+    "pdf-creator-node": "^2.3.4",
+    "react-bootstrap": "^2.4.0",
+    "react-router-dom": "^6.3.0"
   },
   "devDependencies": {
     "concurrently": "^7.2.2",
+<<<<<<< HEAD
     "nodemon": "^2.0.18"
+=======
+    "nodemon": "^2.0.16"
+>>>>>>> 777d5e336b69b9ff40e3b24c2d74348855b74942
   }
 }
