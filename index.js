@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const cors = require("cors")
 
 const authRoute = require("./routes/auth");
 const companyRoute = require("./routes/company");
