@@ -26,6 +26,7 @@ app.listen(process.env.PORT || 3000 , () => {
     connect();
 });
 
+app.use(cors());
 app.use(express.json());
 app.use("/api", authRoute);
 app.use("/api/company", companyRoute);
