@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const mongoose = require("mongoose");
+const cors = require("cors")
 
 const authRoute = require("./routes/auth");
 const companyRoute = require("./routes/company");
@@ -25,6 +26,7 @@ app.listen(process.env.PORT || 3000 , () => {
     connect();
 });
 
+app.use(cors());
 app.use(express.json());
 app.use("/api", authRoute);
 app.use("/api/company", companyRoute);
