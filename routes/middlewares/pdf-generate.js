@@ -20,9 +20,9 @@ const options = {
 const generatePDF = async (req, res) => {
     try{
         const finalReport = await Final.findById(req.params.id);
+        // const companyInfo = await Company.findById(finalReport.idCompany);
         const technicalReport = await Technical.findById(finalReport.idTechnical);
         const finantialReport = await Finantial.findById(finalReport.idFinantial);
-        const companyInfo = await Company.findById(finantialReport.idCompany);
         const installationNumber = await Installation.findById(technicalReport.idInstallationNumber);
 
         const document = {
@@ -30,15 +30,15 @@ const generatePDF = async (req, res) => {
             css: css,
             data: {
                 month: technicalReport.months,
-                name: companyInfo.name,
-                email: companyInfo.email,
-                phone: companyInfo.phone,
-                cnpj: companyInfo.cnpj,
-                street: companyInfo. street,
-                number:companyInfo. number,
-                neighborhood: companyInfo. neighborhood,
-                city: companyInfo.city,
-                state: companyInfo.state,
+                // name: companyInfo.name,
+                // email: companyInfo.email,
+                // phone: companyInfo.phone,
+                // cnpj: companyInfo.cnpj,
+                // street: companyInfo. street,
+                // number:companyInfo. number,
+                // neighborhood: companyInfo. neighborhood,
+                // city: companyInfo.city,
+                // state: companyInfo.state,
                 installationNumber: installationNumber.installationNumber,
                 previousBalance: technicalReport.previousBalance,
                 actualBalance: technicalReport.actualBalance,

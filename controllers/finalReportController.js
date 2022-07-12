@@ -22,6 +22,7 @@ const getFinalReport = async (req, res) => {
         if(finalReport){
             const technicalReport = await Technical.findById(finalReport.idTechnical);
             const finantialReport = await Finantial.findById(finalReport.idFinantial);
+            const WriteReport = await Write.findById(finantialReport.idWrite);
             res.json({technicalReport, finantialReport});
         }else{
             res.status(404).json({"msg": "Final Report wasn't found"})
@@ -50,6 +51,11 @@ const createFinalReport = async (req, res) => {
             injected: req.body.injected,
             totalInjected: req.body.totalInjected
         });
+        const newWrite = new Write({
+            title: req.body.title,
+            content: req.body.content,
+            img: req.body.img
+        });
 
         await newTechnical.save()
         await newWrite.save()
@@ -57,12 +63,13 @@ const createFinalReport = async (req, res) => {
 
         const finalReport = new Final({
             idTechnical: newTechnical._id,
-            idFinantial: newFinantial.id,
+            idFinantial: newFinantial._id,
+            idWrite: newWrite._id,
             companyId: req.body.companyId
         });
         await finalReport.save()
 
-        res.status(201).json({newFinantial, newTechnical, newWrite});
+        res.status(201).json({finalReport, newFinantial, newTechnical, newWrite});
     }catch(err){
         console.error(err);
         res.status(500).send({"msg": "Internal Error!"})
@@ -89,7 +96,12 @@ const updateFinalReport = async (req, res) => {
                 injected: req.body.injected,
                 totalInjected: req.body.totalInjected
             });
-            res.json({updatedTechnical, finantialReport, updatedFinal});
+            const updateWrite = await Write.findByIdAndUpdate(updatedFinal.idWrite, {
+                title: req.body.title,
+                content: req.body.content,
+                img: req.body.img
+            });
+            res.json({updatedFinal, updateWrite, updatedTechnical, finantialReport});
         }
 
         if(updatedFinal) {
