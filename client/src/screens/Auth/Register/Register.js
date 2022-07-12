@@ -1,5 +1,5 @@
 
-import React,  { useState, useEffect } from 'react'
+import React,  { useState, useEffect,  } from 'react'
 import { Card, Container } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -24,35 +24,33 @@ export const Register = () => {
         setPasswordShown(!passwordShown);
     }
 
-    const onChange = (e) => setFormData({
-        ...formData,
-        [e.target.name]: e.target.value,
-        [e.target.email]: e.target.value,
-        [e.target.password]: e.target.value,
-        [e.target.matchPassword]: e.target.value
-    });
+    async function registerUser(event) {
+		event.preventDefault()
 
-    const onSubmit = async(e) => {
-        e.preventDefault();
-        if(password !== matchPassword ){
-            const notify = () => toast("Senha e Confirmar Senha deve ser iguais!");
-            notify();
-        }else{
-            const newUser = {
-                name, email, password
-            }
-            try {
-                const config = {
+		try{
+            if(password === matchPassword){
+                const response = await fetch(REGISTER_URL, {
+                    method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
-                    }
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        password,
+                    }),
+            })
+                const data = await response.json()
+                if (data.status === 'ok') {
+                    window.location.href = '/login'
                 }
-                const body = JSON.stringify(newUser);
-                const res = await fetch(REGISTER_URL, body, config);
-                console.log(res.data)
-            }catch(err){}
+            }
+        }catch(err){
+            console.log(err)
         }
-    }
+	}
+
+    const handlePasswordConfirm = () => {}
 
     useEffect(() => {
         setValidEmail(EMAIL_REGEX.test(email));
@@ -69,7 +67,7 @@ export const Register = () => {
                 <Card className='m-3'>
                     <Card.Header className='text-center p-3'>Cadastre-se</Card.Header>
                     <Card.Body>
-                        <form onSubmit={onSubmit}>
+                        <form onSubmit={registerUser}>
 
                             <div className="form-group m-3">
                                 <label htmlFor="name">
@@ -79,7 +77,7 @@ export const Register = () => {
                                     type="text"
                                     id="name"
                                     className="form-control"
-                                    onChange={onChange}
+                                    onChange={(e) => setName(e.target.value)}
                                     value={name}
                                     required
                                 />
@@ -93,7 +91,7 @@ export const Register = () => {
                                     type="email"
                                     id="email"
                                     className="form-control"
-                                    onChange={onChange}
+                                    onChange={(e) => setEmail(e.target.value)}
                                     value={email}
                                     required
                                     aria-invalid={validEmail ? "false" : "true"}
@@ -109,7 +107,7 @@ export const Register = () => {
                                     type={passwordShown ? "text" : "password"} 
                                     className="form-control" 
                                     id="password"
-                                    onChange={onChange}
+                                    onChange={(e) => setPassword(e.target.value)}
                                     value={password}
                                     required
                                     aria-invalid={validPassword ? "false" : "true"}
@@ -133,7 +131,7 @@ export const Register = () => {
                                     className="form-control" 
                                     id="confirmpassword" 
                                     placeholder="Confirmar Senha"
-                                    onChange={onChange} 
+                                    onChange={(e) => setMatchPassword(e.target.value)} 
                                     value={matchPassword}
                                     required
                                 />
