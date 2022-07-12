@@ -3,11 +3,11 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 const cors = require("cors")
 
-const authRoute = require("./routes/auth");
-const companyRoute = require("./routes/company");
-const userRoute = require("./routes/user");
-const reportRoute = require("./routes/report");
-const maintenanceRoute = require("./routes/maintenance");
+const authRoute = require("./server/routes/auth");
+const companyRoute = require("./server/routes/company");
+const userRoute = require("./server/routes/user");
+const reportRoute = require("./server/routes/report");
+const maintenanceRoute = require("./server/routes/maintenance");
 
 const app = express();
 

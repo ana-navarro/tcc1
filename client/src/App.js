@@ -6,7 +6,7 @@ import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { Dashboard } from "./screens/Dashboard/Dashboard";
 import { Login } from "./screens/Auth/login/Login"
-import { Register } from "./screens/Auth/register/Register"
+import {Register} from "./screens/Auth/register/Register"
 
 function App() {
   const requireAuth = (nextState, replace, next) => {

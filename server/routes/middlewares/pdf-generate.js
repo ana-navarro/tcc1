@@ -8,9 +8,7 @@ const Installation = require("../../models/Installation");
 const pdf = require("pdf-creator-node");
 const path = require('path')
 const fs = require("fs");
-const html = fs.readFileSync("routes/middlewares/template.html", "utf8");
-const css = fs.readFileSync("routes/middlewares/template.css", "utf8");
-
+const html = fs.readFileSync("server/routes/middlewares/template.html", "utf8");
 const options = {
     format: "A4",
     orientation: "portrait",
@@ -22,28 +20,27 @@ const generatePDF = async (req, res) => {
         const finalReport = await Final.findById(req.params.id);
         const technicalReport = await Technical.findById(finalReport.idTechnical);
         const finantialReport = await Finantial.findById(finalReport.idFinantial);
-        const companyInfo = await Company.findById(finantialReport.idCompany);
+        //const companyInfo = await Company.findById(finalReport.companyId);
         const installationNumber = await Installation.findById(technicalReport.idInstallationNumber);
 
         const document = {
             html: html,
-            css: css,
             data: {
-                month: technicalReport.months,
-                name: companyInfo.name,
-                email: companyInfo.email,
-                phone: companyInfo.phone,
-                cnpj: companyInfo.cnpj,
-                street: companyInfo. street,
-                number:companyInfo. number,
-                neighborhood: companyInfo. neighborhood,
-                city: companyInfo.city,
-                state: companyInfo.state,
-                installationNumber: installationNumber.installationNumber,
+                // name: companyInfo.name,
+                // email: companyInfo.email,
+                // phone: companyInfo.phone,
+                // cnpj: companyInfo.cnpj,
+                // street: companyInfo.street,
+                // number:companyInfo.number,
+                // neighborhood: companyInfo.neighborhood,
+                // city: companyInfo.city,
+                // state: companyInfo.state,
+                // month: technicalReport.months,
                 previousBalance: technicalReport.previousBalance,
                 actualBalance: technicalReport.actualBalance,
                 injected: technicalReport.injected,
                 totalInjected:technicalReport.totalInjected,
+                installationNumber: installationNumber.installationNumber,
                 valueEnergy: finantialReport.valueEnergy,
                 discount: finantialReport.discount,
                 valueDiscount: finantialReport.valueDiscount,
