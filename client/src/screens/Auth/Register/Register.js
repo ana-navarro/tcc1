@@ -24,7 +24,7 @@ export const Register = () => {
         setPasswordShown(!passwordShown);
     }
 
-    async function registerUser(event) {
+    async function onSubmit(event) {
 		event.preventDefault()
 
 		try{
@@ -67,7 +67,7 @@ export const Register = () => {
                 <Card className='m-3'>
                     <Card.Header className='text-center p-3'>Cadastre-se</Card.Header>
                     <Card.Body>
-                        <form onSubmit={registerUser}>
+                        <form onSubmit={onSubmit}>
 
                             <div className="form-group m-3">
                                 <label htmlFor="name">
@@ -77,6 +77,7 @@ export const Register = () => {
                                     type="text"
                                     id="name"
                                     className="form-control"
+                                    placeholder='Nome Completo'
                                     onChange={(e) => setName(e.target.value)}
                                     value={name}
                                     required
@@ -91,6 +92,7 @@ export const Register = () => {
                                     type="email"
                                     id="email"
                                     className="form-control"
+                                    placeholder='Email para contato'
                                     onChange={(e) => setEmail(e.target.value)}
                                     value={email}
                                     required
@@ -106,6 +108,7 @@ export const Register = () => {
                                 <input 
                                     type={passwordShown ? "text" : "password"} 
                                     className="form-control" 
+                                    placeholder='Senha'
                                     id="password"
                                     onChange={(e) => setPassword(e.target.value)}
                                     value={password}

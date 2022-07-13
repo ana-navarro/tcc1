@@ -24,7 +24,7 @@ router.post("/login",async (req, res, next) => {
             })
         } else {
             res.status(401)
-            throw new Error('Invalid email or password')
+            throw new Error('Email ou Senha Inválido!')
         }
 
     jwt.sign({ user }, process.env.JWT_SECRET, (err, token) => {
