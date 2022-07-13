@@ -22,8 +22,13 @@ const getFinalReport = async (req, res) => {
         if(finalReport){
             const technicalReport = await Technical.findById(finalReport.idTechnical);
             const finantialReport = await Finantial.findById(finalReport.idFinantial);
+<<<<<<< HEAD:server/controllers/finalReportController.js
             const writeReport = await Write.findById(finalReport.idWrite);
             res.json({technicalReport, finantialReport, writeReport});
+=======
+            const WriteReport = await Write.findById(finantialReport.idWrite);
+            res.json({technicalReport, finantialReport});
+>>>>>>> 25a4254c12e3fda1743ccbf07ddce90d05adc5cf:controllers/finalReportController.js
         }else{
             res.status(404).json({"msg": "Final Report wasn't found"})
         }
@@ -55,7 +60,11 @@ const createFinalReport = async (req, res) => {
             title: req.body.title,
             content: req.body.content,
             img: req.body.img
+<<<<<<< HEAD:server/controllers/finalReportController.js
         })
+=======
+        });
+>>>>>>> 25a4254c12e3fda1743ccbf07ddce90d05adc5cf:controllers/finalReportController.js
 
         await newWrite.save()
         await newTechnical.save()
@@ -63,13 +72,17 @@ const createFinalReport = async (req, res) => {
 
         const finalReport = new Final({
             idTechnical: newTechnical._id,
+<<<<<<< HEAD:server/controllers/finalReportController.js
             idFinantial: newFinantial.id,
+=======
+            idFinantial: newFinantial._id,
+>>>>>>> 25a4254c12e3fda1743ccbf07ddce90d05adc5cf:controllers/finalReportController.js
             idWrite: newWrite._id,
             companyId: req.body.companyId
         });
         await finalReport.save()
 
-        res.status(201).json({newFinantial, newTechnical, newWrite});
+        res.status(201).json({finalReport, newFinantial, newTechnical, newWrite});
     }catch(err){
         console.error(err);
         res.status(500).send({"msg": "Internal Error!"})
@@ -101,7 +114,12 @@ const updateFinalReport = async (req, res) => {
                 injected: req.body.injected,
                 totalInjected: req.body.totalInjected
             });
-            res.json({updatedTechnical, finantialReport, updatedFinal});
+            const updateWrite = await Write.findByIdAndUpdate(updatedFinal.idWrite, {
+                title: req.body.title,
+                content: req.body.content,
+                img: req.body.img
+            });
+            res.json({updatedFinal, updateWrite, updatedTechnical, finantialReport});
         }
 
         if(updatedFinal) {

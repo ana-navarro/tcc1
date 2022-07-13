@@ -18,6 +18,7 @@ const options = {
 const generatePDF = async (req, res) => {
     try{
         const finalReport = await Final.findById(req.params.id);
+        // const companyInfo = await Company.findById(finalReport.idCompany);
         const technicalReport = await Technical.findById(finalReport.idTechnical);
         const finantialReport = await Finantial.findById(finalReport.idFinantial);
         //const companyInfo = await Company.findById(finalReport.companyId);

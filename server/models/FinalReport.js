@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 
 const finalreportSchema = new mongoose.Schema({
     idWrite: { type: mongoose.Schema.Types.ObjectId, ref: "write-reports", default:''},
-    idTechnical: { type: mongoose.Schema.Types.ObjectId, ref: "technincal", required:true},
-    idFinantial: { type: mongoose.Schema.Types.ObjectId, ref: "finantial", required:true},
-    companyId: { type: mongoose.Schema.Types.ObjectId, ref: "companies", required:true },
+    idTechnical: { type: mongoose.Schema.Types.ObjectId, ref: "technincal", default: ''},
+    idFinantial: { type: mongoose.Schema.Types.ObjectId, ref: "finantial", default:''},
+    companyId: { type: mongoose.Schema.Types.ObjectId, ref: "companies" },
     isConclude: { type: Boolean, default: false }
 },
 {
