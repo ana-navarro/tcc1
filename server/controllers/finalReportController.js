@@ -69,7 +69,7 @@ const createFinalReport = async (req, res) => {
         });
         await finalReport.save()
 
-        res.status(201).json({newFinantial, newTechnical, newWrite});
+        res.status(201).json({finalReport, newFinantial, newTechnical, newWrite});
     }catch(err){
         console.error(err);
         res.status(500).send({"msg": "Internal Error!"})
@@ -101,7 +101,12 @@ const updateFinalReport = async (req, res) => {
                 injected: req.body.injected,
                 totalInjected: req.body.totalInjected
             });
-            res.json({updatedTechnical, finantialReport, updatedFinal});
+            const updateWrite = await Write.findByIdAndUpdate(updatedFinal.idWrite, {
+                title: req.body.title,
+                content: req.body.content,
+                img: req.body.img
+            });
+            res.json({updatedFinal, updateWrite, updatedTechnical, finantialReport});
         }
 
         if(updatedFinal) {
