@@ -2,13 +2,36 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 
 const userSchema = new mongoose.Schema({
-    name: { type: String, required:true },
-    email: { type:String, required:true, unique:true },
-    companyId: { type: mongoose.Schema.Types.ObjectId, ref: "companies" },
-    password: { type:String, required:true },
-    isAdmin: { type: Boolean, default: false },
-    resetLink: {type:String, default:''},
-    verified: { type: Boolean, default: false }
+    name: { 
+        type: String,
+        trim: true, 
+        required:true 
+    },
+    email: { 
+        type:String,
+        trim: true, 
+        required:true, 
+        unique:true 
+    },
+    companyId: { 
+        type: mongoose.Schema.Types.ObjectId, 
+        ref: "companies",
+    },
+    password: { 
+        type:String,
+        min: 8,
+        max: 64, 
+        required:true 
+    },
+    isAdmin: { 
+        type: Boolean, 
+        default: false 
+    },
+    resetCode: "",
+    isVerified: { 
+        type: Boolean, 
+        default: false 
+    }
 },
 {
     timestamps:true

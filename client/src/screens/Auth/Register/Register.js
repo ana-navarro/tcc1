@@ -1,14 +1,10 @@
-
-import axios from 'axios';
-import React,  { useState, useEffect,  } from 'react'
+import React,  { useState  } from 'react'
 import { Card, Container } from 'react-bootstrap'
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 
 import "./Register.css"
 
-const PASSWORD_REGEX = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
-const EMAIL_REGEX = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i;
 const REGISTER_URL = 'http://localhost:3000/api/register';
 
 export const Register = () => {
@@ -27,15 +23,27 @@ export const Register = () => {
 		event.preventDefault();
 
         if(password === matchPassword){
-            const userObj = {
-                name, password, email, matchPassword
-            }
             try{
-                const response = await axios.post(REGISTER_URL, userObj);
-                if(response.data.success){
+                const response = await fetch(REGISTER_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        name,
+                        email,
+                        password,
+                        matchPassword
+                    }),
+                });
+                const data = await response.json();
+
+                if(data.user){
+                    localStorage.setItem('token', data.user)
                     toast.success("Usuário cadastrado com sucesso!");
+                    window.location.href = '/home'
                 }else{
-                    toast.error(response.data.message);
+                    toast.error("Deu algo de errado");
                 }
             }catch(err){}
         }

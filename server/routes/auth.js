@@ -35,9 +35,9 @@ router.post("/login",async (req, res, next) => {
 });
 
 router.post('/register', 
-    check('name', 'First Name is required').not().isEmpty(),
-    check('email', 'Please include a valid email').isEmail(),
-    check('password', 'Please enter a valid password').isLength({min: 8})
+    check('name', 'O Nome é obrigatório').not().isEmpty(),
+    check('email', 'O Email está Inválido').isEmail(),
+    check("password", "A senha precisa de pelo menos uma letra maíscula, minuscula, um numero e caractere especial").matches(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9]).{8,}$/, "i")
     , async (req, res) => {
         const errors = validationResult(req);
         if(!errors.isEmpty()){
@@ -71,6 +71,7 @@ router.post('/register',
             res.status(500).send('Internal Error');
         }
 });
+
 
 router.post('/logout', checkToken, (req, res) => {
     res.removeHeader('x-auth-token');
