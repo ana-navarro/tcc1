@@ -1,7 +1,8 @@
 
+import axios from 'axios';
 import React,  { useState, useEffect,  } from 'react'
 import { Card, Container } from 'react-bootstrap'
-import { ToastContainer, toast } from 'react-toastify';
+import toast, { Toaster } from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 
 import "./Register.css"
@@ -11,13 +12,11 @@ const EMAIL_REGEX = /^[a-z0-9.]+@[a-z0-9]+\.[a-z]+\.([a-z]+)?$/i;
 const REGISTER_URL = 'http://localhost:3000/api/register';
 
 export const Register = () => {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [matchPassword, setMatchPassword] = useState('')
+    const [name, setName] = useState();
+    const [password, setPassword] = useState();
+    const [matchPassword, setMatchPassword] = useState();
+    const [email,setEmail] = useState();
 
-    const [validEmail, setValidEmail] = useState(false);
-    const [validPassword, setValidPassword] = useState(false);
     const [passwordShown, setPasswordShown] = useState(false);
 
     const handleShowHide = (e) => {
@@ -25,50 +24,33 @@ export const Register = () => {
     }
 
     async function onSubmit(event) {
-		event.preventDefault()
+		event.preventDefault();
 
-		try{
-            if(password === matchPassword){
-                const response = await fetch(REGISTER_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name,
-                        email,
-                        password,
-                    }),
-            })
-                const data = await response.json()
-                if (data.status === 'ok') {
-                    window.location.href = '/login'
-                }
+        if(password === matchPassword){
+            const userObj = {
+                name, password, email, matchPassword
             }
-        }catch(err){
-            console.log(err)
+            try{
+                const response = await axios.post(REGISTER_URL, userObj);
+                if(response.data.success){
+                    toast.success("Usuário cadastrado com sucesso!");
+                }else{
+                    toast.error(response.data.message);
+                }
+            }catch(err){}
+        }
+        else{
+            toast.error("Senha e Confirmar Senha estão diferentes!");
         }
 	}
 
-    const handlePasswordConfirm = () => {}
-
-    useEffect(() => {
-        setValidEmail(EMAIL_REGEX.test(email));
-    }, [email])
-
-    useEffect(() => {
-        setValidPassword(PASSWORD_REGEX.test(password));
-    }, [password])
-
     return (
         <div>
-            <ToastContainer />
             <Container id="register">
                 <Card className='m-3'>
                     <Card.Header className='text-center p-3'>Cadastre-se</Card.Header>
                     <Card.Body>
                         <form onSubmit={onSubmit}>
-
                             <div className="form-group m-3">
                                 <label htmlFor="name">
                                     Nome:
@@ -96,7 +78,6 @@ export const Register = () => {
                                     onChange={(e) => setEmail(e.target.value)}
                                     value={email}
                                     required
-                                    aria-invalid={validEmail ? "false" : "true"}
                                 />
                             </div>
 
@@ -113,7 +94,6 @@ export const Register = () => {
                                     onChange={(e) => setPassword(e.target.value)}
                                     value={password}
                                     required
-                                    aria-invalid={validPassword ? "false" : "true"}
                                 />
                                 <small id="passwordHelp" className="form-text text-muted">
                                     <ul className="list-group m-3">
@@ -141,7 +121,7 @@ export const Register = () => {
                             </div>
 
                             <div className='text-center'>
-                                <button type="submit" className="btn btn-primary m-3" disabled={!validPassword ||  !validEmail ? true : false}>
+                                <button type="submit" className="btn btn-primary m-3">
                                     Enviar
                                 </button>
                             </div>

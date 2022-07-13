@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { Toaster } from 'react-hot-toast';
 
 import './App.css';
 import './bootstrap.min.css';
@@ -31,6 +32,10 @@ function App() {
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
         />
         <Header />
+        <Toaster
+          position="top-right"
+          reverseOrder={false}
+        />
         <Routes>
           <Route path="/" element={<Dashboard />} onChange={requireAuth}>
             <Route index element={<Dashboard />} onChange={requireAuth} />
