@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 
 const writeReport = new mongoose.Schema({
-    title: { type: String, required:true },
-    content: { type: String, required:true },
-    img: { type: String, required:true }
+    title: { type: String, default:'' },
+    content: { type: String, default:'' },
+    img: { type: String, default:'' }
 },
 {
     timestamps:true

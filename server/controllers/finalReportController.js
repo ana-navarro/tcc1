@@ -22,7 +22,8 @@ const getFinalReport = async (req, res) => {
         if(finalReport){
             const technicalReport = await Technical.findById(finalReport.idTechnical);
             const finantialReport = await Finantial.findById(finalReport.idFinantial);
-            res.json({technicalReport, finantialReport});
+            const writeReport = await Write.findById(finalReport.idWrite);
+            res.json({technicalReport, finantialReport, writeReport});
         }else{
             res.status(404).json({"msg": "Final Report wasn't found"})
         }
@@ -50,14 +51,20 @@ const createFinalReport = async (req, res) => {
             injected: req.body.injected,
             totalInjected: req.body.totalInjected
         });
+        const newWrite = new Write({
+            title: req.body.title,
+            content: req.body.content,
+            img: req.body.img
+        })
 
-        await newTechnical.save()
         await newWrite.save()
+        await newTechnical.save()
         await newFinantial.save()
 
         const finalReport = new Final({
             idTechnical: newTechnical._id,
             idFinantial: newFinantial.id,
+            idWrite: newWrite._id,
             companyId: req.body.companyId
         });
         await finalReport.save()
@@ -74,6 +81,11 @@ const updateFinalReport = async (req, res) => {
         const updatedFinal = await Final.findById(req.params.id);
 
         if(updatedFinal){
+            const writeReport = await Write.findByIdAndUpdate(updatedFinal.idWrite, {
+                title: req.body.title,
+                content: req.body.content,
+                img: req.body.img
+            });
             const finantialReport = await Finantial.findByIdAndUpdate(updatedFinal.idFinantial, {
                 valueEnergy: req.body.valueEnergy,
                 discount: req.body.discount,
@@ -107,7 +119,11 @@ const updateFinalReport = async (req, res) => {
 const deleteFinalReport = async (req, res) => {
     try{
         const finalReportId = req.params.id;
-        const finalReport = Final.findByIdAndDelete(finalReportId);
+        const finalReport = Final.findById(finalReportId);
+        const finantialReport = Finantial.findByIdAndDelete(finalReport.idFinantial);
+        const technicalReport = Technical.findByIdAndDelete(finalReport.idTechnical);
+        const writeReport = Write.findByIdAndDelete(finalReport.idWrite);
+        const deleteFinal = Final.findByIdAndDelete(finalReportId);
         res.status(200).json({"msg": "Final Report was deleted!"});
     }catch(err){
         console.error(err);
