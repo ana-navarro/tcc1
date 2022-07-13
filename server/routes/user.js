@@ -16,6 +16,7 @@ router.post("/company/add/:id", checkToken, async (req, res) => {
     try {
         const company = await Company.findById(req.body.companyId);
         const userCompany = await User.findByIdAndUpdate(req.params.id, {
+            companyId: company,
             companyId: company
         });
         await userCompany.save()
