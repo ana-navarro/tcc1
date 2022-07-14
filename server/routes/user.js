@@ -19,8 +19,8 @@ router.post("/company/add/:id", checkToken, async (req, res) => {
             companyId: company,
             companyId: company
         });
-        await userCompany.save()
-        res.json(userCompany);
+        const saveCompany = await userCompany.save()
+        res.json(saveCompany);
     }catch(err){
         console.error(err);
         res.status(500).send("Internal Error!");

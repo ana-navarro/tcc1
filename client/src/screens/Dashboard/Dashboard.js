@@ -8,10 +8,12 @@ export const Dashboard = () => {
     const navigate = useNavigate()
     useEffect(() => {
         if(user){
-            navigate('/')
+            navigate('')
         }
     })
     return (
-        <div></div>
+        <div>
+          Dashboard
+        </div>
     )
 }

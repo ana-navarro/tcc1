@@ -37,7 +37,7 @@ function App() {
         />
         <Routes>
           <Route path="/" element={<Dashboard />} onChange={requireAuth}>
-            <Route index element={<Dashboard />} onChange={requireAuth} />
+            <Route index element={<Dashboard />}  onChange={requireAuth}/>
           </Route>
           <Route path="/landing" element={<Landing />}>
             <Route index element={<Landing />} />
