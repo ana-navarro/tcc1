@@ -3,7 +3,6 @@ import { Toaster } from 'react-hot-toast';
 
 import './App.css';
 import './bootstrap.min.css';
-import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { Landing } from "./screens/Landing/Landing"
 import { Dashboard } from "./screens/Dashboard/Dashboard";
@@ -32,7 +31,6 @@ function App() {
           rel="stylesheet"
           href="https://fonts.googleapis.com/icon?family=Material+Icons"
         />
-        <Header />
         <Toaster
           position="top-right"
           reverseOrder={false}

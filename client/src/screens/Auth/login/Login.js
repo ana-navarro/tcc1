@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import toast from 'react-hot-toast'
 import axios from 'axios'
 import { Container, Card } from 'react-bootstrap'
+import { Header } from "../../../components/Header"
 
 import "./Login.css"
 
@@ -19,7 +20,7 @@ export const Login = ({ location, history }) => {
             password,
         }
         try {
-            const response = await axios.post("/api/login/", userObj)
+            const response = await axios.post("http://localhost:3000/api/login/", userObj)
             toast.dismiss()
             await console.log(response.data)
             if (response.data.success) {
@@ -40,11 +41,12 @@ export const Login = ({ location, history }) => {
 
     return (
         <div>
+            <Header />
             <Container>
                 <Card className='m-3'>
                     <Card.Header className='text-center p-3'>Login</Card.Header>
                     <Card.Body>
-                        <form className="form-group" on={onSubmit}>
+                        <form className="form-group">
                         <label htmlFor="email">Email:</label>
                         <input
                             className="form-control"
@@ -69,7 +71,7 @@ export const Login = ({ location, history }) => {
                             />
                             <br />
                             <div className='text-center'>
-                                <button className="btn btn-primary">Login</button>
+                                <button className="btn btn-primary" onClick={onSubmit}>Login</button>
                                 <a type="button" className="btn btn-warning m-2" href='/register'>Cadastre-se</a>
                             </div>
                         </form>

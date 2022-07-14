@@ -5,6 +5,7 @@ import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
 
+import { Header } from "../../../components/Header"
 import "./Register.css"
 
 export const Register = () => {
@@ -48,6 +49,7 @@ export const Register = () => {
 
     return (
         <div>
+            <Header />
             <Container id="register">
                 <Card className='m-3'>
                     <Card.Header className='text-center p-3'>Cadastre-se</Card.Header>
