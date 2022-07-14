@@ -62,10 +62,6 @@ router.post('/register',
                 password: hash,
             });
             const token = generateToken(newUser._id);
-            // const token = await new Token({
-            //     userId: newUser._id,
-            //     token: crypto.randomBytes(32).toString("hex"),
-            // }).save();
 
             res.status(201).json({
                 newUser,

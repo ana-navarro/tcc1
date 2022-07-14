@@ -13,12 +13,13 @@ export const Login = ({ location, history }) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
+        
         const userObj = {
             email,
             password,
         }
         try {
-            const response = await axios.post("http://localhost:3000/api/login/", userObj)
+            const response = await axios.post("/api/login/", userObj)
             toast.dismiss()
             await console.log(response.data)
             if (response.data.success) {

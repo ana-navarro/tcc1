@@ -5,13 +5,14 @@ import './App.css';
 import './bootstrap.min.css';
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
+import { Landing } from "./screens/Landing/Landing"
 import { Dashboard } from "./screens/Dashboard/Dashboard";
 import { Login } from "./screens/Auth/login/Login"
-import {Register} from "./screens/Auth/register/Register"
+import { Register } from "./screens/Auth/register/Register"
 
 function App() {
   const requireAuth = (nextState, replace, next) => {
-    if(!localStorage.getItem('token')) {
+    if(!localStorage.getItem('user')) {
       replace({
         pathname: "/login",
         state: {nextPathname: nextState.location.pathname}
@@ -39,6 +40,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} onChange={requireAuth}>
             <Route index element={<Dashboard />} onChange={requireAuth} />
+          </Route>
+          <Route path="/landing" element={<Landing />}>
+            <Route index element={<Landing />} />
           </Route>
           <Route path="/login" element={<Login />}>
             <Route index element={<Login />} />
