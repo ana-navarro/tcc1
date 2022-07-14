@@ -1,11 +1,10 @@
+import axios from 'axios';
 import React,  { useState  } from 'react'
 import { Card, Container } from 'react-bootstrap'
 import toast from 'react-hot-toast';
 import 'react-toastify/dist/ReactToastify.css';
 
 import "./Register.css"
-
-const REGISTER_URL = 'http://localhost:3000/api/register';
 
 export const Register = () => {
     const [name, setName] = useState();
@@ -23,29 +22,26 @@ export const Register = () => {
 		event.preventDefault();
 
         if(password === matchPassword){
+            const userObj = {
+                name,
+                password,
+                email,
+                matchPassword,
+            }
             try{
-                const response = await fetch(REGISTER_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        name,
-                        email,
-                        password,
-                        matchPassword
-                    }),
-                });
-                const data = await response.json();
-
-                if(data.user){
-                    localStorage.setItem('token', data.user)
-                    toast.success("Usuário cadastrado com sucesso!");
-                    window.location.href = '/home'
-                }else{
-                    toast.error("Deu algo de errado");
+                const response = await axios.post("http://localhost:3000/api/register", userObj)
+                toast.dismiss()
+                if (response.data.success) {
+                    toast.error(response.data.message)
+                    await console.log(response.data)
+                } else {
+                    await console.log(response.data)
+                    toast.success("Usuário criado com sucesso!")
                 }
-            }catch(err){}
+            }catch(err){
+                toast.error("Deu algum erro! " );
+                console.log(err)
+            }
         }
         else{
             toast.error("Senha e Confirmar Senha estão diferentes!");
