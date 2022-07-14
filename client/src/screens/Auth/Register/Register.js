@@ -2,6 +2,7 @@ import axios from 'axios';
 import React,  { useState  } from 'react'
 import { Card, Container } from 'react-bootstrap'
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
 
 import "./Register.css"
@@ -11,6 +12,7 @@ export const Register = () => {
     const [password, setPassword] = useState();
     const [matchPassword, setMatchPassword] = useState();
     const [email,setEmail] = useState();
+    const navigate = useNavigate()
 
     const [passwordShown, setPasswordShown] = useState(false);
 
@@ -31,13 +33,9 @@ export const Register = () => {
             try{
                 const response = await axios.post("http://localhost:3000/api/register", userObj)
                 toast.dismiss()
-                if (response.data.success) {
-                    toast.error(response.data.message)
-                    await console.log(response.data)
-                } else {
-                    await console.log(response.data)
-                    toast.success("Usuário criado com sucesso!")
-                }
+                await console.log(response.data)
+                toast.success("Usuário criado com sucesso!");
+                navigate('/login')
             }catch(err){
                 toast.error("Deu algum erro! " );
                 console.log(err)

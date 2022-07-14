@@ -11,27 +11,32 @@ const sendEmail = require("../utils/sendEmail");
 
 dotenv.config();
 
-router.post("/login",async (req, res, next) => {
+router.post("/login",async (req, res) => {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email })
-    if (user && (await user.matchPassword(password))) {
-            res.json({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            token: generateToken(user._id),
-            })
+    try{
+        const user = await User.findOne({ email})
+        if (user) {
+            if (await user.matchPassword(password)) {
+                const frontEndDatas = {
+                    _id: user._id,
+                    email: user.email,
+                    name: user.name,
+                    isAdmin: user.isAdmin,
+                }
+                //jwt
+                const token = jwt.sign(frontEndDatas, process.env.JWT_SECRET, { expiresIn: 60 * 60 })
+                res.status(200).send({ success: true, message: 'Usuário Conectado com Sucesso!', data: token })
+            } else {
+                res.status(200).send({ success: false, message: 'Credenciais Erradas!' })
+            }
         } else {
-            res.status(401)
-            throw new Error('Email ou Senha Inválido!')
+            res.status(200).send({ success: false, message: 'Usuário não cadastrado', data: null })
         }
-
-    jwt.sign({ user }, process.env.JWT_SECRET, (err, token) => {
-        res.json({
-            token: token
-        });
-    });
+    }catch(err){
+        console.error(err)
+        res.status(500).json({"message": "Internal Server Error"});
+    }
 });
 
 router.post('/register', 

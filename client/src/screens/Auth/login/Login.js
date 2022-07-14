@@ -1,4 +1,7 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import toast from 'react-hot-toast'
+import axios from 'axios'
 import { Container, Card } from 'react-bootstrap'
 
 import "./Login.css"
@@ -6,8 +9,33 @@ import "./Login.css"
 export const Login = ({ location, history }) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const navigate = useNavigate()
 
-    const onSubmit = (e) => {}
+    const onSubmit = async (e) => {
+        e.preventDefault();
+        const userObj = {
+            email,
+            password,
+        }
+        try {
+            const response = await axios.post("http://localhost:3000/api/login/", userObj)
+            toast.dismiss()
+            await console.log(response.data)
+            if (response.data.success) {
+                toast.success(response.data.message)
+                localStorage.setItem("user", response.data.data)
+                await console.log(response.data)
+                navigate('/')
+            } else {
+                toast.error(response.data.message)
+                await console.log(response.data)
+            }
+        } catch (error) {
+            toast.dismiss()
+            toast.error('Algo deu errado')
+            console.log(error)
+        }
+    }
 
     return (
         <div>
