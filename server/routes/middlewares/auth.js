@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv").config();
-const http = require('http');
 
 const checkToken = (req, res, next) => {
     const token = req.header('x-auth-token');
+
     if(!token){
         return res.status(401).json({ msg:"No token found! You are not authorized!"});
     }
@@ -17,6 +17,27 @@ const checkToken = (req, res, next) => {
     }
 }
 
+const authMiddleware = (req, res, next) => {
+    const authHeader = req.headers.authorization
+    if (!authHeader || !authHeader.startsWith('Bearer')) {
+        throw new UnAuthenticatedError('Authentication Invalid')
+    }
+    const token = authHeader.split(' ')[1]
+    try {
+        const user = jwt.verify(token, process.env.JWT_SECRET)
+        const payload = jwt.verify(token, process.env.JWT_SECRET)
+        req.user = { userId: payload.userId }
+        if(user){
+            req.body.user = user
+            next()
+        }else {
+            res.status(500).send({ message: 'Unauthenticated' })
+        }
+    } catch (error) {
+        throw new UnAuthenticatedError('Authentication Invalid')
+    }
+}
+
 const generateToken = (_id) => {
     return jwt.sign({ _id }, process.env.JWT_SECRET, {
         expiresIn: '30d',
@@ -24,4 +45,4 @@ const generateToken = (_id) => {
 }
 
 
-module.exports = { generateToken, checkToken };
+module.exports = { generateToken, checkToken, authMiddleware };

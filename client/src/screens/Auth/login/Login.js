@@ -23,6 +23,7 @@ export const Login = ({ location, history }) => {
             const response = await axios.post("http://localhost:3000/api/login/", userObj)
             toast.dismiss()
             await console.log(response.data)
+            
             if (response.data.success) {
                 toast.success(response.data.message)
                 localStorage.setItem("user", response.data.data)

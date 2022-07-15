@@ -23,9 +23,10 @@ router.post("/login",async (req, res) => {
                     email: user.email,
                     name: user.name,
                     isAdmin: user.isAdmin,
+                    companyId: user.companyId
                 }
-                //jwt
                 const token = jwt.sign(frontEndDatas, process.env.JWT_SECRET, { expiresIn: 60 * 60 })
+                console.log("User connected successfull")
                 res.status(200).send({ success: true, message: 'Usuário Conectado com Sucesso!', data: token })
             } else {
                 res.status(200).send({ success: false, message: 'Credenciais Erradas!' })

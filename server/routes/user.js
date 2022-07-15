@@ -1,5 +1,5 @@
 const router = require("express").Router({ mergeParams: true });
-const { checkToken } = require("./middlewares/auth");
+const { checkToken, authMiddleware } = require("./middlewares/auth");
 const { editProfile, getUsers, deleteUser, getUser, changePassword } = require("../controllers/userController");
 const User = require("../models/User");
 const Company = require("../models/Company");
@@ -39,5 +39,14 @@ router.get("/company/list/:id", checkToken, async (req, res) => {
         res.status(500).send("Internal Error!");
     }
 });
+
+router.get('/get-user-info', authMiddleware, async (req, res) => {
+    try {
+        res.send({ success: true, data: req.body.user })
+    } catch (error) {
+        res.status(400).send(error)
+    }
+})
+
 
 module.exports = router;
