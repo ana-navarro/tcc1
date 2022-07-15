@@ -4,16 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import './Dashboard.css'
 
 export const Dashboard = () => {
-    const user = JSON.parse(localStorage.getItem('user'));
+    const user = JSON.toString(localStorage.getItem('user'));
     const navigate = useNavigate()
     useEffect(() => {
         if(user){
-            navigate('')
+            navigate('/landing')
         }
     })
     return (
         <div>
-          Dashboard
+            Dashboard
         </div>
     )
 }
