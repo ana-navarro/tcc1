@@ -18,23 +18,15 @@ const checkToken = (req, res, next) => {
 }
 
 const authMiddleware = (req, res, next) => {
-    const authHeader = req.headers.authorization
-    if (!authHeader || !authHeader.startsWith('Bearer')) {
-        throw new UnAuthenticatedError('Authentication Invalid')
-    }
-    const token = authHeader.split(' ')[1]
-    try {
-        const user = jwt.verify(token, process.env.JWT_SECRET)
-        const payload = jwt.verify(token, process.env.JWT_SECRET)
-        req.user = { userId: payload.userId }
-        if(user){
-            req.body.user = user
-            next()
-        }else {
-            res.status(500).send({ message: 'Unauthenticated' })
-        }
-    } catch (error) {
-        throw new UnAuthenticatedError('Authentication Invalid')
+    const token = req.headers.authorization.split(' ')[1]
+
+    const user = jwt.verify(token, secret)
+
+    if (user) {
+        req.body.user = user.id
+        next()
+    } else {
+        res.status(500).send({ message: 'Usuário não autenticado!' })
     }
 }
 

@@ -1,12 +1,14 @@
-import React from 'react'
-
+import React, {useEffect} from 'react'
+import toast from 'react-hot-toast';
 import { ProSidebar, SidebarHeader, SidebarFooter, SidebarContent, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
 import { Link } from 'react-router-dom';
 import { FiLogOut } from "react-icons/fi";
+import { useNavigate } from 'react-router-dom';
 import "./style.css"
 
 export const SideBar = () => {
+    const navigate = useNavigate()
     const headerStyle = {
         padding: "10%",
         textTransform: "uppercase",
@@ -16,7 +18,18 @@ export const SideBar = () => {
     const SiderBarStyle = {
         height: "100vh"
     }
-    
+
+    const onClickLogout = async () => {
+        try{
+            const removeToken = localStorage.removeItem('x-auth-token');
+            const removeUser = localStorage.removeItem('user');
+            navigate('/login')
+        }catch(err){
+            toast.error('Algo deu errado');
+            console.log(err);
+        }
+    }
+
     return (
         <div id="header">
             <ProSidebar style={SiderBarStyle}>
@@ -86,7 +99,7 @@ export const SideBar = () => {
                         <MenuItem>
                             <p className='flex justify-items-center'>Desenvolvido por Minera Engenharia</p>
                         </MenuItem>
-                        <MenuItem icon={<FiLogOut />}>
+                        <MenuItem icon={<FiLogOut />} onClick={onClickLogout}>
                             Logout
                             <Link to='/' />
                         </MenuItem>

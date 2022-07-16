@@ -5,19 +5,16 @@ const editProfile = async (req, res) => {
     const { name, 
             isAdmin, 
             isEngineer, 
-            isFinantial, 
-            isManager } = req.body;
+            companyId } = req.body;
     try{
         const  editUser = await User.findById(req.params.id);
         if(editUser){
             editUser.name = name,
             editUser.isAdmin = isAdmin,
             editUser.isEngineer = isEngineer,
-            editUser.isFinantial = isFinantial,
-            editUser.isManager = isManager
+            editProfile.companyId = companyId
         } else {
-            res.status(404);
-            throw new Error('User not found');
+            res.status(404).send({message: 'User not found'});
         }
         await editUser.save()
         res.status(202).json(editUser)
@@ -78,10 +75,27 @@ const changePassword = async (req, res) => {
     res.status(200).json(user)
 }
 
+const getUserProfile = async (req, res) => {
+    const user = await User.findById(req.user._id)
+
+    if (user) {
+        res.json({
+            _id: user._id,
+            name: user.name,
+            email: user.email,
+            isAdmin: user.isAdmin,
+        })
+    } else {
+        res.status(404)
+        throw new Error('User not found')
+    }
+}
+
 module.exports = {
     changePassword,
     editProfile,
     getUsers,
     deleteUser,
-    getUser
+    getUser,
+    getUserProfile
 }

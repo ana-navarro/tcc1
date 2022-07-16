@@ -1,6 +1,6 @@
 const router = require("express").Router({ mergeParams: true });
 const { checkToken, authMiddleware } = require("./middlewares/auth");
-const { editProfile, getUsers, deleteUser, getUser, changePassword } = require("../controllers/userController");
+const { editProfile, getUsers, deleteUser, getUser, changePassword, getUserProfile } = require("../controllers/userController");
 const User = require("../models/User");
 const Company = require("../models/Company");
 
@@ -8,6 +8,7 @@ router.get("/", checkToken, getUsers);
 router.put("/edit-profile/:id", checkToken, editProfile);
 router.delete("/:id", checkToken, deleteUser);
 router.get("/:id", checkToken, getUser);
+router.get("/profile", checkToken, getUserProfile);
 
 
 router.put("/reset/:id", checkToken, changePassword);
@@ -20,6 +21,7 @@ router.post("/company/add/:id", checkToken, async (req, res) => {
             companyId: company
         });
         const saveCompany = await userCompany.save()
+
         res.json(saveCompany);
     }catch(err){
         console.error(err);
@@ -39,14 +41,6 @@ router.get("/company/list/:id", checkToken, async (req, res) => {
         res.status(500).send("Internal Error!");
     }
 });
-
-router.get('/get-user-info', authMiddleware, async (req, res) => {
-    try {
-        res.send({ success: true, data: req.body.user })
-    } catch (error) {
-        res.status(400).send(error)
-    }
-})
 
 
 module.exports = router;
