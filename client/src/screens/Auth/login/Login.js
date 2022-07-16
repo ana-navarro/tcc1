@@ -6,6 +6,7 @@ import { Container, Card } from 'react-bootstrap'
 import { Header } from "../../../components/Header"
 
 import "./Login.css"
+import { Footer } from '../../../components/Footer'
 
 export const Login = ({ location, history }) => {
     const [email, setEmail] = useState('')
@@ -79,6 +80,7 @@ export const Login = ({ location, history }) => {
                     </Card.Body>
                 </Card>
             </Container>
+            <Footer />
         </div>
     )
 }

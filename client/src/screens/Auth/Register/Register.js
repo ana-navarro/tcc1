@@ -4,6 +4,7 @@ import { Card, Container } from 'react-bootstrap'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
+import { Footer } from '../../../components/Footer';
 
 import { Header } from "../../../components/Header"
 import "./Register.css"
@@ -133,6 +134,7 @@ export const Register = () => {
                     </Card.Body>
                 </Card>
             </Container>
+            <Footer />
     </div>
     )
 }
