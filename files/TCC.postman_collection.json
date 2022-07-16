@@ -1,0 +1,702 @@
+{
+	"info": {
+		"_postman_id": "f63e5707-7743-40ac-8e2e-48da71af44a9",
+		"name": "TCC",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19007292"
+	},
+	"item": [
+		{
+			"name": "Register User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Ana Navarro\",\r\n    \"email\": \"anaelisa@gmail.com\",\r\n    \"password\": \"S3nh@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/register/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register User Copy",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Monkey D. Luffy\",\r\n    \"email\": \"aninhacn98@live.com\",\r\n    \"password\": \"12345678\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/register/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"register",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"aninhacn98@live.com\",\r\n    \"password\": \"America0214*\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/login/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmMDIwYzBlMTg2ODE2NGYxZjcwY2UiLCJpYXQiOjE2NTc3MzM3MTYsImV4cCI6MTY2MDMyNTcxNn0.mwcixC2B1Jv2IHE4jIdmBBdvAVHV_tZ18HKtXwrLans",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/logout/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"logout",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Company",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmMDIwYzBlMTg2ODE2NGYxZjcwY2UiLCJpYXQiOjE2NTc3MzM3MTYsImV4cCI6MTY2MDMyNTcxNn0.mwcixC2B1Jv2IHE4jIdmBBdvAVHV_tZ18HKtXwrLans",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"VGX\",\r\n    \"email\": \"VGX@gmail.com\",\r\n    \"phone\": \"3138901-9952\",\r\n    \"cnpj\": \"92131966000186\",\r\n    \"street\": \"Rua G / Montes Claros MG\",\r\n    \"neighborhood\": \"Vila Anália\",\r\n    \"number\": \"800\",\r\n    \"state\": \"MG\",\r\n    \"city\": \"Montes Claros\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/company/create",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"company",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Company",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmNWI1MmU5YmM2MGE0MDcxZmIyMzQiLCJlbWFpbCI6ImFuaW5oYWNuOThAbGl2ZS5jb20iLCJuYW1lIjoiQW5hIEVsaXNhIENhcnZhbGhvIGRlIE5hdmFycm8iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjU3ODgxNTIxLCJleHAiOjE2NTc4ODUxMjF9.dKKi1fO7ZksEydCAp7LfiF6TaedbfsfciKOYT3SLSXk",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"VGX\",\r\n    \"administrator\": \"Fulano da Silva\",\r\n    \"phone\": \"3138901-9952\",\r\n    \"cnpj\": \"92131966000186\",\r\n    \"street\": \"Rua G / Montes Claros MG\",\r\n    \"neighborhood\": \"Vila Anália\",\r\n    \"number\": \"800\",\r\n    \"state\": \"MG\",\r\n    \"city\": \"Montes Claros\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/company/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"company",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Company",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmMDIwYzBlMTg2ODE2NGYxZjcwY2UiLCJpYXQiOjE2NTc3MzM3MTYsImV4cCI6MTY2MDMyNTcxNn0.mwcixC2B1Jv2IHE4jIdmBBdvAVHV_tZ18HKtXwrLans",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Mário e Theo Marcenaria\",\r\n    \"administrator\": \"Fulano da Silva\",\r\n    \"phone\": \"3138901-9952\",\r\n    \"cnpj\": \"92131966000186\",\r\n    \"street\": \"Rua G / Montes Claros MG\",\r\n    \"neighborhood\": \"Vila Anália\",\r\n    \"number\": \"800\",\r\n    \"state\": \"MG\",\r\n    \"city\": \"Montes Claros\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/company/62d0881ed44259f36808ebee",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"company",
+						"62d0881ed44259f36808ebee"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Add Company User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmMDIwYzBlMTg2ODE2NGYxZjcwY2UiLCJpYXQiOjE2NTc3MzM2NDQsImV4cCI6MTY2MDMyNTY0NH0.LCdJWiFzg000s_7GOGOC9BxKosVnNK_uTVLl2_SMvm4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"companyId\": \"62cf026834bbfc7c98533ec8\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/user/company/add/62d087fed44259f36808ebea",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"company",
+						"add",
+						"62d087fed44259f36808ebea"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Company User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmMDIwYzBlMTg2ODE2NGYxZjcwY2UiLCJpYXQiOjE2NTc3MzM2NDQsImV4cCI6MTY2MDMyNTY0NH0.LCdJWiFzg000s_7GOGOC9BxKosVnNK_uTVLl2_SMvm4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"companyId\": \"62a8b1ad901cef415fb4bdfc\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/user/company/list/62cf026834bbfc7c98533ec8",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"company",
+						"list",
+						"62cf026834bbfc7c98533ec8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Edit User",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmMDIwYzBlMTg2ODE2NGYxZjcwY2UiLCJpYXQiOjE2NTc3MzM2NDQsImV4cCI6MTY2MDMyNTY0NH0.LCdJWiFzg000s_7GOGOC9BxKosVnNK_uTVLl2_SMvm4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Ciclano Silva\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/user/edit-profile/62d087fed44259f36808ebea",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"edit-profile",
+						"62d087fed44259f36808ebea"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get All Users",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmNWI1MmU5YmM2MGE0MDcxZmIyMzQiLCJlbWFpbCI6ImFuaW5oYWNuOThAbGl2ZS5jb20iLCJuYW1lIjoiQW5hIEVsaXNhIENhcnZhbGhvIGRlIE5hdmFycm8iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjU3ODQ5NDY0LCJleHAiOjE2NTc4NTMwNjR9.Or6YHYxAPZEpNCSBJsSKs_sj2fjCbEzKI6FeqRSl_oQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/user/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get One User",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmMDIwYzBlMTg2ODE2NGYxZjcwY2UiLCJpYXQiOjE2NTc3MzM2NDQsImV4cCI6MTY2MDMyNTY0NH0.LCdJWiFzg000s_7GOGOC9BxKosVnNK_uTVLl2_SMvm4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/user/62d087fed44259f36808ebea",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"62d087fed44259f36808ebea"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmMDIwYzBlMTg2ODE2NGYxZjcwY2UiLCJpYXQiOjE2NTc3MzM2NDQsImV4cCI6MTY2MDMyNTY0NH0.LCdJWiFzg000s_7GOGOC9BxKosVnNK_uTVLl2_SMvm4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/user/62d087fed44259f36808ebea",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"62d087fed44259f36808ebea"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Installation Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmMDIwYzBlMTg2ODE2NGYxZjcwY2UiLCJpYXQiOjE2NTc3MzM2NDQsImV4cCI6MTY2MDMyNTY0NH0.LCdJWiFzg000s_7GOGOC9BxKosVnNK_uTVLl2_SMvm4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idCompany\": \"62cf026834bbfc7c98533ec8\",\r\n    \"installationNumber\": \"100007543\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/company/installation/add",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"company",
+						"installation",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Final Report Create",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmMDIwYzBlMTg2ODE2NGYxZjcwY2UiLCJpYXQiOjE2NTc3MzM2NDQsImV4cCI6MTY2MDMyNTY0NH0.LCdJWiFzg000s_7GOGOC9BxKosVnNK_uTVLl2_SMvm4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"companyId\": \"62a8b1ad901cef415fb4bdfc\",\r\n    \"valueEnergy\": \"3.00\",\r\n    \"discount\": \"0.10\",\r\n    \"valueDiscount\": \"100\",\r\n    \"date\": \"2022-06-20\",\r\n    \"payment\": \"1000\",\r\n    \"idInstallationNumber\": \"62cf03df78e4c4973b99a3cf\",\r\n    \"months\": \"june\",\r\n    \"previousBalance\": \"759.9\",\r\n    \"actualBalance\": \"1546.02\",\r\n    \"injected\": \"786.12\",\r\n    \"totalInjected\": \"786.12\",\r\n    \"title\": \"Relatorio Minera Junho\",\r\n    \"content\": \"Lorem Ipsum ..........\",\r\n    \"img\": \"some random img\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/report/final/add",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"report",
+						"final",
+						"add"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Final Report Update",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmMDIwYzBlMTg2ODE2NGYxZjcwY2UiLCJpYXQiOjE2NTc3MzM2NDQsImV4cCI6MTY2MDMyNTY0NH0.LCdJWiFzg000s_7GOGOC9BxKosVnNK_uTVLl2_SMvm4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idCompany\": \"62a8b1ad901cef415fb4bdfc\",\r\n    \"valueEnergy\": \"5.50\",\r\n    \"discount\": \"1.25\",\r\n    \"valueDiscount\": \"112.62\",\r\n    \"date\": \"2022-06-20\",\r\n    \"payment\": \"1765.98\",\r\n    \"idInstallationNumber\": \"62cf03df78e4c4973b99a3cf\",\r\n    \"months\": \"june\",\r\n    \"previousBalance\": \"758.9\",\r\n    \"actualBalance\": \"1545.02\",\r\n    \"injected\": \"784.12\",\r\n    \"totalInjected\": \"784.12\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/report/final/62cf03e878e4c4973b99a3d7",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"report",
+						"final",
+						"62cf03e878e4c4973b99a3d7"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Final Report Get One",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmMDIwYzBlMTg2ODE2NGYxZjcwY2UiLCJpYXQiOjE2NTc3MzM2NDQsImV4cCI6MTY2MDMyNTY0NH0.LCdJWiFzg000s_7GOGOC9BxKosVnNK_uTVLl2_SMvm4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idCompany\": \"62a8b1ad901cef415fb4bdfc\",\r\n    \"valueEnergy\": \"5.50\",\r\n    \"discount\": \"1.20\",\r\n    \"valueDiscount\": \"112.62\",\r\n    \"date\": \"2022-06-20\",\r\n    \"payment\": \"1765.98\",\r\n    \"idInstallationNumber\": \"62b0fe15a7c4d134cbf2ee87\",\r\n    \"months\": \"june\",\r\n    \"previousBalance\": \"758.9\",\r\n    \"actualBalance\": \"1545.02\",\r\n    \"injected\": \"784.12\",\r\n    \"totalInjected\": \"784.12\",\r\n    \"title\": \"Relatorio Minera\",\r\n    \"content\": \"Lorem Ipsum LActea......\",\r\n    \"img\": \"some random img from usine\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/report/final/62cf04a178e4c4973b99a405",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"report",
+						"final",
+						"62cf04a178e4c4973b99a405"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Final Report Get All",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmMDIwYzBlMTg2ODE2NGYxZjcwY2UiLCJpYXQiOjE2NTc3MzM2NDQsImV4cCI6MTY2MDMyNTY0NH0.LCdJWiFzg000s_7GOGOC9BxKosVnNK_uTVLl2_SMvm4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idCompany\": \"62a8b1ad901cef415fb4bdfc\",\r\n    \"valueEnergy\": \"5.50\",\r\n    \"discount\": \"1.20\",\r\n    \"valueDiscount\": \"112.62\",\r\n    \"date\": \"2022-06-20\",\r\n    \"payment\": \"1765.98\",\r\n    \"idInstallationNumber\": \"62b0fe15a7c4d134cbf2ee87\",\r\n    \"months\": \"june\",\r\n    \"previousBalance\": \"758.9\",\r\n    \"actualBalance\": \"1545.02\",\r\n    \"injected\": \"784.12\",\r\n    \"totalInjected\": \"784.12\",\r\n    \"title\": \"Relatorio Minera\",\r\n    \"content\": \"Lorem Ipsum LActea......\",\r\n    \"img\": \"some random img from usine\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/report/final/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"report",
+						"final",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Generate PDF",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmMDIwYzBlMTg2ODE2NGYxZjcwY2UiLCJpYXQiOjE2NTc3MzM2NDQsImV4cCI6MTY2MDMyNTY0NH0.LCdJWiFzg000s_7GOGOC9BxKosVnNK_uTVLl2_SMvm4",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idCompany\": \"62a8b1ad901cef415fb4bdfc\",\r\n    \"valueEnergy\": \"5.50\",\r\n    \"discount\": \"1.20\",\r\n    \"valueDiscount\": \"112.62\",\r\n    \"date\": \"2022-06-20\",\r\n    \"payment\": \"1765.98\",\r\n    \"idInstallationNumber\": \"62b0fe15a7c4d134cbf2ee87\",\r\n    \"months\": \"june\",\r\n    \"previousBalance\": \"758.9\",\r\n    \"actualBalance\": \"1545.02\",\r\n    \"injected\": \"784.12\",\r\n    \"totalInjected\": \"784.12\",\r\n    \"title\": \"Relatorio Minera\",\r\n    \"content\": \"Lorem Ipsum LActea......\",\r\n    \"img\": \"some random img from usine\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/report/final/pdf/62cf04a178e4c4973b99a405",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"report",
+						"final",
+						"pdf",
+						"62cf04a178e4c4973b99a405"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

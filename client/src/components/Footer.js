@@ -6,7 +6,7 @@ export const Footer = () => {
         <div>
             <footer>
                 <Row>
-                    <Col className='container fixed bottom-0 text-center p-3'>Copyright &copy; SIGUS/Minera Engenharia</Col>
+                    <Col className='container fixed bottom-0 text-center py-3'>Copyright &copy; SIGUS/Minera Engenharia</Col>
                 </Row>
             </footer>
         </div>

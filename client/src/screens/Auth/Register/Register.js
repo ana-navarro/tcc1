@@ -1,17 +1,20 @@
+import axios from 'axios';
 import React,  { useState  } from 'react'
 import { Card, Container } from 'react-bootstrap'
 import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom'
 import 'react-toastify/dist/ReactToastify.css';
+import { Footer } from '../../../components/Footer';
 
+import { Header } from "../../../components/Header"
 import "./Register.css"
-
-const REGISTER_URL = 'http://localhost:3000/api/register';
 
 export const Register = () => {
     const [name, setName] = useState();
     const [password, setPassword] = useState();
     const [matchPassword, setMatchPassword] = useState();
     const [email,setEmail] = useState();
+    const navigate = useNavigate()
 
     const [passwordShown, setPasswordShown] = useState(false);
 
@@ -23,29 +26,22 @@ export const Register = () => {
 		event.preventDefault();
 
         if(password === matchPassword){
+            const userObj = {
+                name,
+                password,
+                email,
+                matchPassword,
+            }
             try{
-                const response = await fetch(REGISTER_URL, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        name,
-                        email,
-                        password,
-                        matchPassword
-                    }),
-                });
-                const data = await response.json();
-
-                if(data.user){
-                    localStorage.setItem('token', data.user)
-                    toast.success("Usuário cadastrado com sucesso!");
-                    window.location.href = '/home'
-                }else{
-                    toast.error("Deu algo de errado");
-                }
-            }catch(err){}
+                const response = await axios.post("http://localhost:3000/api/register", userObj)
+                toast.dismiss()
+                await console.log(response.data)
+                toast.success("Usuário criado com sucesso!");
+                navigate('/login')
+            }catch(err){
+                toast.error("Deu algum erro! " );
+                console.log(err)
+            }
         }
         else{
             toast.error("Senha e Confirmar Senha estão diferentes!");
@@ -54,6 +50,7 @@ export const Register = () => {
 
     return (
         <div>
+            <Header />
             <Container id="register">
                 <Card className='m-3'>
                     <Card.Header className='text-center p-3'>Cadastre-se</Card.Header>
@@ -137,6 +134,7 @@ export const Register = () => {
                     </Card.Body>
                 </Card>
             </Container>
+            <Footer />
     </div>
     )
 }
