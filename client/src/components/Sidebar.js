@@ -23,6 +23,7 @@ export const SideBar = () => {
         try{
             const removeToken = localStorage.removeItem('x-auth-token');
             const removeUser = localStorage.removeItem('user');
+            localStorage.clear()
             navigate('/login')
         }catch(err){
             toast.error('Algo deu errado');
@@ -92,6 +93,16 @@ export const SideBar = () => {
                             Agenda
                             <Link to='/' />
                         </MenuItem>
+                        <SubMenu title="Sistema">
+                            <MenuItem>
+                                Placas
+                                <Link to='/' />
+                            </MenuItem>
+                            <MenuItem>
+                                Inversores
+                                <Link to='/' />
+                            </MenuItem>
+                        </SubMenu>
                     </Menu>
                 </SidebarContent>
                 <SidebarFooter>

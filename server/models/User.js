@@ -31,6 +31,10 @@ const userSchema = new mongoose.Schema({
         type: Boolean, 
         default: false 
     },
+    isFinantial: { 
+        type: Boolean, 
+        default: false 
+    },
     resetCode: "",
     isVerified: { 
         type: Boolean, 

@@ -19,16 +19,16 @@ export const Profile = () => {
                 }
             })
             if (response.data.success) {
-                setUserInfo(response.data.data)
+                setUserInfo(response.data.user)
             } else {
                 localStorage.removeItem('user')
                 navigate('/login')
-                toast.error('Algo deu errado')
+                toast.error('Algo deu errado!')
             }
         } catch (error) {
             localStorage.removeItem('user')
             navigate('/login')
-            toast.error('Algo deu errado')
+            toast.error('Algo deu errado!')
         }
     }
 
