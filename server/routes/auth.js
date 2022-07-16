@@ -11,6 +11,17 @@ const sendEmail = require("../utils/sendEmail");
 
 dotenv.config();
 
+const getCurrentUser = async function () {
+    const currentUser = await Parse.User.current();
+        if (currentUser !== null) {
+        Alert.alert(
+            'Success!',
+            `${currentUser.get('username')} is the current user!`,
+        );
+    }
+    return currentUser;
+};
+
 router.post("/login",async (req, res) => {
 
     try{
@@ -21,7 +32,8 @@ router.post("/login",async (req, res) => {
                 const frontEndData = JSON.stringify({
                     _id: user._id,
                     name: user.name,
-                    email: user.email
+                    email: user.email,
+                    token: generateToken(user._id),
                 })
                 const token = jwt.sign(frontEndData, process.env.JWT_SECRET, (err, token) => {
                     res.status(200).send({ success: true, message: 'Usuário Conectado com Sucesso!', data: token }).json({user, token})

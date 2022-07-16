@@ -4,7 +4,7 @@ const MaintenanceSchema = new mongoose.Schema({
     title: { type: String, required:true },
     companyId: { type: mongoose.Schema.Types.ObjectId, ref: "companies" },
     dateMaintain: { type: Date, required:true },
-    description: { type: String, required:true },
+    description: { type: String },
     isConclude: { type: Boolean, default: false }
 },
 {

@@ -24,10 +24,10 @@ export const Login = ({ location, history }) => {
             const response = await axios.post("http://localhost:3000/api/login/", userObj)
             toast.dismiss()
             await console.log(response.data)
-            
             if (response.data.success) {
+                const userDetails = JSON.parse(localStorage.getItem('user'));
                 toast.success(response.data.message)
-                localStorage.setItem("user", response.data.data)
+                localStorage.setItem("user", userDetails)
                 localStorage.setItem("x-auth-token", response.data.data)
                 await console.log(response.data)
                 navigate('/')
