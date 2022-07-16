@@ -27,12 +27,12 @@ export const Dashboard = () => {
             <div className='main'>
                 <div className='content'>
                     <Generate/>
-                    <div class="grid grid-cols-2 gap-4 py-2">
+                    <div className="grid grid-cols-2 gap-4 py-2">
                         <Company />
                         <BarChartGenerate />
                     </div>
                     <Payments />
-                    <div class="grid grid-cols-2 gap-4 py-2">
+                    <div className="grid grid-cols-2 gap-4 py-2">
                         <Visit />
                         <GeneratePieChart/>
                     </div>
