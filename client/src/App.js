@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from 'react-hot-toast';
 
 import './App.css';
@@ -26,25 +26,43 @@ function App() {
           reverseOrder={false}
         />
         <Routes>
-          <Route path="/" element={<Dashboard />}>
-            <Route index element={<Dashboard />} />
+          <Route path="/" element={<ProtcetedRoutes><Dashboard /></ProtcetedRoutes>}>
+            <Route index element={<ProtcetedRoutes><Dashboard /></ProtcetedRoutes>} />
           </Route>
-          <Route path="/" element={<Profile />}>
-            <Route index element={<Profile />} />
+          <Route path="/profile" element={<ProtcetedRoutes><Profile /></ProtcetedRoutes>}>
+            <Route index element={<ProtcetedRoutes><Profile /></ProtcetedRoutes>} />
           </Route>
-          <Route path="/landing" element={<Landing />}>
-            <Route index element={<Landing />} />
+          <Route path="/landing" element={<PublicRoutes><Landing /></PublicRoutes>}>
+            <Route index element={<PublicRoutes><Landing /></PublicRoutes>} />
           </Route>
-          <Route path="/login" element={<Login />}>
-            <Route index element={<Login />} />
+          <Route path="/login" element={<PublicRoutes><Login /></PublicRoutes>}>
+            <Route index element={<PublicRoutes><Login /></PublicRoutes>} />
           </Route>
-          <Route path="/register" element={<Register />}>
-            <Route index element={<Register />} />
+          <Route path="/register" element={<PublicRoutes><Register /></PublicRoutes>}>
+            <Route index element={<PublicRoutes><Register /></PublicRoutes>} />
           </Route>
         </Routes>
       </BrowserRouter>
     </div>
   );
+}
+
+export function ProtcetedRoutes({ children }) {
+  const user = localStorage.getItem('user');
+  if (user && user !== '') {
+    return children
+  } else {
+    return <Navigate to='/landing' />
+  }
+}
+
+export function PublicRoutes({ children }) {
+  const user = localStorage.getItem('user');
+  if (user && user !== '') {
+    return <Navigate to='/' />
+  } else {
+    return children
+  }
 }
 
 export default App;

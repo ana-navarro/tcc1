@@ -28,10 +28,11 @@ export const Login = ({ location, history }) => {
             if (response.data.success) {
                 toast.success(response.data.message)
                 localStorage.setItem("user", response.data.data)
+                localStorage.setItem("x-auth-token", response.data.data)
                 await console.log(response.data)
                 navigate('/')
             } else {
-                toast.error(response.data.message)
+                toast.error('Algo deu errado')
                 await console.log(response.data)
             }
         } catch (error) {

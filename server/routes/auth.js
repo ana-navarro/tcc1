@@ -12,33 +12,39 @@ const sendEmail = require("../utils/sendEmail");
 dotenv.config();
 
 router.post("/login",async (req, res) => {
-    const { email, password } = req.body;
 
     try{
-        const user = await User.findOne({ email})
-        if (user) {
-            if (await user.matchPassword(password)) {
-                const frontEndDatas = {
+        const { email, password } = req.body;
+
+        const user = await User.findOne({ email })
+        if (user && (await user.matchPassword(password))) {
+                const frontEndData = JSON.stringify({
                     _id: user._id,
-                    email: user.email,
                     name: user.name,
-                    isAdmin: user.isAdmin,
-                    companyId: user.companyId
-                }
-                const token = jwt.sign(frontEndDatas, process.env.JWT_SECRET, { expiresIn: 60 * 60 })
-                console.log("User connected successfull")
-                res.status(200).send({ success: true, message: 'Usuário Conectado com Sucesso!', data: token })
+                    email: user.email
+                })
+                const token = jwt.sign(frontEndData, process.env.JWT_SECRET, (err, token) => {
+                    res.status(200).send({ success: true, message: 'Usuário Conectado com Sucesso!', data: token }).json({user, token})
+                    if(err) console.log(err)
+                }, { expiresIn: 60 * 60 });
             } else {
-                res.status(200).send({ success: false, message: 'Credenciais Erradas!' })
+                res.status(401)
+                throw new Error('Email ou Senha Inválido!')
             }
-        } else {
-            res.status(200).send({ success: false, message: 'Usuário não cadastrado', data: null })
-        }
     }catch(err){
         console.error(err)
         res.status(500).json({"message": "Internal Server Error"});
     }
 });
+
+router.get("/user/info", async (req, res) => {
+    try{
+        res.send({ success: true, data: req.body.user })
+    }catch(error){
+        console.log(error)
+        res.status(400).send(error)
+    }
+})
 
 router.post('/register', 
     check('name', 'O Nome é obrigatório').not().isEmpty(),
