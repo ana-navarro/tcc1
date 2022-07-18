@@ -7,7 +7,7 @@ import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
 
 export const Profile = () => {
-    const [userInfo, setUserInfo] = useState(null)
+    const [userInfo, setUserInfo] = useState()
     const navigate = useNavigate()
 
     const getData = async () => {

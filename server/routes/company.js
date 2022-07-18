@@ -2,16 +2,31 @@ const router = require("express").Router();
 const { checkToken } = require("./middlewares/auth");
 const { getCompanies, createCompany, updateCompany, deleteCompany, getCompany } = require("../controllers/companyController");
 const { createInstallation, updateInstallation, deleteInstallation, getInstallations } = require('../controllers/installationController');
+const Installation = require("../models/Installation");
 
-router.get("/", checkToken, getCompanies);
-router.post("/create", checkToken, createCompany);
-router.put("/:id", checkToken, updateCompany);
-router.delete("/:id", checkToken, deleteCompany);
-router.get("/:id", checkToken, getCompany);
+router.get("/", getCompanies);
+router.get("/:id", getCompany);
+router.post("/create", createCompany);
+router.put("/:id/edit", updateCompany);
+router.delete("/:id", deleteCompany);
+router.get("/:id", getCompany);
 
-router.get("/installations/", checkToken, getInstallations);
-router.post("/installation/add", checkToken, createInstallation);
-router.put("/installation/:id", checkToken, updateInstallation);
-router.delete("/installation/:id", checkToken, deleteInstallation);
+router.get("/installations/", getInstallations);
+router.post("/installation/add", createInstallation);
+router.put("/installation/:id", updateInstallation);
+router.delete("/installation/:id", deleteInstallation);
+
+router.get("/:id/installations/", async (req, res) => {
+    const {installationNumber, ...others} = req.query
+    try{
+        const installations = await Installation.find({
+            ...others
+        }).where('idCompany').equals(req.params.id);
+        res.status(200).json(installations)
+    }catch(err){
+        console.error(err);
+        res.status(500).send("Internal Error!");
+    }
+});
 
 module.exports = router;

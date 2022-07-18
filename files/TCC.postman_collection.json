@@ -83,7 +83,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\": \"aninhacn98@live.com\",\r\n    \"password\": \"America0214*\"\r\n}",
+					"raw": "{\r\n    \"email\": \"anaelisa@gmail.com\",\r\n    \"password\": \"S3nh@123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -147,7 +147,7 @@
 				"header": [
 					{
 						"key": "x-auth-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmMDIwYzBlMTg2ODE2NGYxZjcwY2UiLCJpYXQiOjE2NTc3MzM3MTYsImV4cCI6MTY2MDMyNTcxNn0.mwcixC2B1Jv2IHE4jIdmBBdvAVHV_tZ18HKtXwrLans",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmNWI1MmU5YmM2MGE0MDcxZmIyMzQiLCJlbWFpbCI6ImFuaW5oYWNuOThAbGl2ZS5jb20iLCJuYW1lIjoiQW5hIEVsaXNhIENhcnZhbGhvIGRlIE5hdmFycm8iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjU3ODgzMjIwLCJleHAiOjE2NTc4ODY4MjB9.xlxKsykPJCnVnnVGSVDlbyhsdcQG6SFKhkmjs4d2QUk",
 						"type": "text"
 					}
 				],
@@ -185,7 +185,7 @@
 				"header": [
 					{
 						"key": "x-auth-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmNWI1MmU5YmM2MGE0MDcxZmIyMzQiLCJlbWFpbCI6ImFuaW5oYWNuOThAbGl2ZS5jb20iLCJuYW1lIjoiQW5hIEVsaXNhIENhcnZhbGhvIGRlIE5hdmFycm8iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjU3ODgxNTIxLCJleHAiOjE2NTc4ODUxMjF9.dKKi1fO7ZksEydCAp7LfiF6TaedbfsfciKOYT3SLSXk",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI2MmQxNGE0MmY2M2RmZWQ0Mzc4YjQ5NjIiLCJuYW1lIjoiQW5hIE5hdmFycm8iLCJlbWFpbCI6ImFuYWVsaXNhQGdtYWlsLmNvbSJ9.b9nCUrS4seoPlVUJ1ACBj5RB2n4tKZuRs_cDOWM5FPc",
 						"type": "text"
 					}
 				],
@@ -214,6 +214,84 @@
 			"response": []
 		},
 		{
+			"name": "Get One Company",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI2MmQxNGE0MmY2M2RmZWQ0Mzc4YjQ5NjIiLCJuYW1lIjoiQW5hIE5hdmFycm8iLCJlbWFpbCI6ImFuYWVsaXNhQGdtYWlsLmNvbSJ9.b9nCUrS4seoPlVUJ1ACBj5RB2n4tKZuRs_cDOWM5FPc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"VGX\",\r\n    \"administrator\": \"Fulano da Silva\",\r\n    \"phone\": \"3138901-9952\",\r\n    \"cnpj\": \"92131966000186\",\r\n    \"street\": \"Rua G / Montes Claros MG\",\r\n    \"neighborhood\": \"Vila Anália\",\r\n    \"number\": \"800\",\r\n    \"state\": \"MG\",\r\n    \"city\": \"Montes Claros\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/company/62cf026834bbfc7c98533ec8",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"company",
+						"62cf026834bbfc7c98533ec8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Company Installations",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "x-auth-token",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJfaWQiOiI2MmQxNGE0MmY2M2RmZWQ0Mzc4YjQ5NjIiLCJuYW1lIjoiQW5hIE5hdmFycm8iLCJlbWFpbCI6ImFuYWVsaXNhQGdtYWlsLmNvbSJ9.b9nCUrS4seoPlVUJ1ACBj5RB2n4tKZuRs_cDOWM5FPc",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"VGX\",\r\n    \"administrator\": \"Fulano da Silva\",\r\n    \"phone\": \"3138901-9952\",\r\n    \"cnpj\": \"92131966000186\",\r\n    \"street\": \"Rua G / Montes Claros MG\",\r\n    \"neighborhood\": \"Vila Anália\",\r\n    \"number\": \"800\",\r\n    \"state\": \"MG\",\r\n    \"city\": \"Montes Claros\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/company/62cf026834bbfc7c98533ec8/installations/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"company",
+						"62cf026834bbfc7c98533ec8",
+						"installations",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Update Company",
 			"request": {
 				"method": "PUT",
@@ -226,7 +304,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"name\": \"Mário e Theo Marcenaria\",\r\n    \"administrator\": \"Fulano da Silva\",\r\n    \"phone\": \"3138901-9952\",\r\n    \"cnpj\": \"92131966000186\",\r\n    \"street\": \"Rua G / Montes Claros MG\",\r\n    \"neighborhood\": \"Vila Anália\",\r\n    \"number\": \"800\",\r\n    \"state\": \"MG\",\r\n    \"city\": \"Montes Claros\" \r\n}",
+					"raw": "{\r\n    \"name\": \"Minera\",\r\n    \"administrator\": \"Fulano da Silva\",\r\n    \"phone\": \"3138901-9952\",\r\n    \"cnpj\": \"92131966000186\",\r\n    \"street\": \"Rua G / Montes Claros MG\",\r\n    \"neighborhood\": \"Vila Anália\",\r\n    \"number\": \"800\",\r\n    \"state\": \"MG\",\r\n    \"city\": \"Montes Claros\" \r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -234,7 +312,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/api/company/62d0881ed44259f36808ebee",
+					"raw": "localhost:3000/api/company/62cf026834bbfc7c98533ec8",
 					"host": [
 						"localhost"
 					],
@@ -242,7 +320,7 @@
 					"path": [
 						"api",
 						"company",
-						"62d0881ed44259f36808ebee"
+						"62cf026834bbfc7c98533ec8"
 					]
 				}
 			},
@@ -269,7 +347,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/api/user/company/add/62d087fed44259f36808ebea",
+					"raw": "localhost:3000/api/user/company/add/62cf5f69291b902ef8cb02ce",
 					"host": [
 						"localhost"
 					],
@@ -279,7 +357,7 @@
 						"user",
 						"company",
 						"add",
-						"62d087fed44259f36808ebea"
+						"62cf5f69291b902ef8cb02ce"
 					]
 				}
 			},
@@ -346,7 +424,7 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:3000/api/user/edit-profile/62d087fed44259f36808ebea",
+					"raw": "localhost:3000/api/user/edit-profile/62cf5f69291b902ef8cb02ce",
 					"host": [
 						"localhost"
 					],
@@ -355,7 +433,7 @@
 						"api",
 						"user",
 						"edit-profile",
-						"62d087fed44259f36808ebea"
+						"62cf5f69291b902ef8cb02ce"
 					]
 				}
 			},
@@ -371,7 +449,7 @@
 				"header": [
 					{
 						"key": "x-auth-token",
-						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmNWI1MmU5YmM2MGE0MDcxZmIyMzQiLCJlbWFpbCI6ImFuaW5oYWNuOThAbGl2ZS5jb20iLCJuYW1lIjoiQW5hIEVsaXNhIENhcnZhbGhvIGRlIE5hdmFycm8iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjU3ODQ5NDY0LCJleHAiOjE2NTc4NTMwNjR9.Or6YHYxAPZEpNCSBJsSKs_sj2fjCbEzKI6FeqRSl_oQ",
+						"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmNmNWI1MmU5YmM2MGE0MDcxZmIyMzQiLCJlbWFpbCI6ImFuaW5oYWNuOThAbGl2ZS5jb20iLCJuYW1lIjoiQW5hIEVsaXNhIENhcnZhbGhvIGRlIE5hdmFycm8iLCJpc0FkbWluIjpmYWxzZSwiaWF0IjoxNjU3OTM1MTM2LCJleHAiOjE2NTc5Mzg3MzZ9.J9uBkYnarUwb62NfMFtnb17kDOhznl-dOQQs-eeFSKs",
 						"type": "text"
 					}
 				],
@@ -485,7 +563,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"idCompany\": \"62cf026834bbfc7c98533ec8\",\r\n    \"installationNumber\": \"100007543\"\r\n}",
+					"raw": "{\r\n    \"idCompany\": \"62cf026834bbfc7c98533ec8\",\r\n    \"installationNumber\": \"100007543111\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -693,6 +771,44 @@
 						"final",
 						"pdf",
 						"62cf04a178e4c4973b99a405"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User Info",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MmQxNGE0MmY2M2RmZWQ0Mzc4YjQ5NjIiLCJlbWFpbCI6ImFuYWVsaXNhQGdtYWlsLmNvbSIsIm5hbWUiOiJBbmEgTmF2YXJybyIsImlzQWRtaW4iOmZhbHNlLCJpYXQiOjE2NTc5Mzc3NjEsImV4cCI6MTY1Nzk0MTM2MX0.kJEvWfTPS8in2iWpb_ZY-bFR3qCmFzjm_QnYPG-OPpg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/api/user/get-user-info",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"user",
+						"get-user-info"
 					]
 				}
 			},

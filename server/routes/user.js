@@ -1,19 +1,19 @@
 const router = require("express").Router({ mergeParams: true });
-const { checkToken, authMiddleware } = require("./middlewares/auth");
+const { authMiddleware } = require("./middlewares/auth");
 const { editProfile, getUsers, deleteUser, getUser, changePassword, getUserProfile } = require("../controllers/userController");
 const User = require("../models/User");
 const Company = require("../models/Company");
 
-router.get("/", checkToken, getUsers);
-router.put("/edit-profile/:id", checkToken, editProfile);
-router.delete("/:id", checkToken, deleteUser);
-router.get("/:id", checkToken, getUser);
-router.get("/profile", checkToken, getUserProfile);
+router.get("/", getUsers);
+router.put("/edit-profile/:id", editProfile);
+router.delete("/:id", deleteUser);
+router.get("/:id", getUser);
+router.get("/profile", getUserProfile);
 
 
-router.put("/reset/:id", checkToken, changePassword);
+router.put("/reset/:id", changePassword);
 
-router.post("/company/add/:id", checkToken, async (req, res) => {
+router.post("/company/add/:id", async (req, res) => {
     try {
         const company = await Company.findById(req.body.companyId);
         const userCompany = await User.findByIdAndUpdate(req.params.id, {
@@ -29,7 +29,7 @@ router.post("/company/add/:id", checkToken, async (req, res) => {
     }
 });
 
-router.get("/company/list/:id", checkToken, async (req, res) => {
+router.get("/company/list/:id", async (req, res) => {
     const { firstname, lastname, email, companyId, ...others } = req.query;
     try{
         const users = await User.find({

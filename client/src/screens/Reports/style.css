@@ -1,0 +1,17 @@
+#header {
+  position: absolute;
+}
+#header .pro-sidebar {
+  height: 100vh;
+  width: 100%;
+}
+
+#header .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
+  color: white;
+  margin: 5% 0%;
+}
+
+#header .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item:hover {
+  background-color: grey;
+  margin: 5% 0%;
+}

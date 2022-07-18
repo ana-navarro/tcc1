@@ -27,7 +27,7 @@ export const Login = ({ location, history }) => {
             if (response.data.success) {
                 const userDetails = JSON.parse(localStorage.getItem('user'));
                 toast.success(response.data.message)
-                localStorage.setItem("user", userDetails)
+                localStorage.setItem("user", response.data.data)
                 localStorage.setItem("x-auth-token", response.data.data)
                 await console.log(response.data)
                 navigate('/')

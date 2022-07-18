@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React from 'react'
 import toast from 'react-hot-toast';
 import { ProSidebar, SidebarHeader, SidebarFooter, SidebarContent, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import 'react-pro-sidebar/dist/css/styles.css';
@@ -21,8 +21,6 @@ export const SideBar = () => {
 
     const onClickLogout = async () => {
         try{
-            const removeToken = localStorage.removeItem('x-auth-token');
-            const removeUser = localStorage.removeItem('user');
             localStorage.clear()
             navigate('/login')
         }catch(err){
@@ -59,34 +57,30 @@ export const SideBar = () => {
                         </SubMenu>
                         <SubMenu title="Usinas">
                             <MenuItem>
-                                Empresas
-                                <Link to='/' />
+                                Lista de Usinas
+                                <Link to='/companies' />
                             </MenuItem>
                             <MenuItem>
-                                Cadastro de Empresas
-                                <Link to='/' />
-                            </MenuItem>
-                            <MenuItem>
-                                Instalações
-                                <Link to='/' />
+                                Cadastro de Usinas
+                                <Link to='/company/add' />
                             </MenuItem>
                         </SubMenu>
                         <SubMenu title="Relatórios">
                             <MenuItem>
                                 Relatório Técnico
-                                <Link to='/' />
+                                <Link to='/report/technical' />
                             </MenuItem>
                             <MenuItem>
                                 Relatório Financeiro
-                                <Link to='/' />
+                                <Link to='/report/finantial' />
                             </MenuItem>
                             <MenuItem>
                                 Relatório Final
-                                <Link to='/' />
+                                <Link to='/report/final' />
                             </MenuItem>
                             <MenuItem>
                                 Gerar Relatório Final
-                                <Link to='/' />
+                                <Link to='/report/final/add' />
                             </MenuItem>
                         </SubMenu>
                         <MenuItem>

@@ -5,23 +5,23 @@ const { getTechnicals, createTechnical, updateTechnical, deleteTechnical, getTec
 const { getFinatials, getFinatial, createFinatial, updateFinatial, deleteFinatial } = require("../controllers/finantialController");
 const { generatePDF } = require("./middlewares/pdf-generate");
 
-router.get("/final/", checkToken, getFinalReports);
-router.get("/final/:id", checkToken, getFinalReport);
-router.post("/final/add", checkToken, createFinalReport);
-router.put("/final/:id", checkToken, updateFinalReport);
-router.delete("/final/:id", checkToken, deleteFinalReport);
+router.get("/final/", getFinalReports);
+router.get("/final/:id", getFinalReport);
+router.post("/final/add", createFinalReport);
+router.put("/final/:id", updateFinalReport);
+router.delete("/final/:id", deleteFinalReport);
 router.get("/final/pdf/:id", generatePDF);
 
-router.get("/technical/", checkToken, getTechnicals);
-router.post("/technical/add", checkToken, createTechnical);
-router.put("/technical/:id", checkToken, updateTechnical);
-router.delete("/technical/:id", checkToken, deleteTechnical);
-router.get("/technical/:id", checkToken, getTechnical);
+router.get("/technical/", getTechnicals);
+router.post("/technical/add", createTechnical);
+router.put("/technical/:id", updateTechnical);
+router.delete("/technical/:id", deleteTechnical);
+router.get("/technical/:id", getTechnical);
 
-router.get("/finantial/", checkToken, getFinatials);
-router.get("/finantial/:id", checkToken, getFinatial);
-router.post("/finantial/add", checkToken, createFinatial);
-router.put("/finantial/:id", checkToken, updateFinatial);
-router.delete("/finantial/:id", checkToken, deleteFinatial);
+router.get("/finantial/", getFinatials);
+router.get("/finantial/:id", getFinatial);
+router.post("/finantial/add", createFinatial);
+router.put("/finantial/:id", updateFinatial);
+router.delete("/finantial/:id", deleteFinatial);
 
 module.exports = router
